@@ -1,20 +1,11 @@
-// src/components/UI/ProtectedRoute.jsx
-import { Navigate } from 'react-router-dom';
-import { useAuthStore } from '../../store/authStore';
-import LoadingSpinner from './LoadingSpinner';
+import { Navigate } from 'react-router-dom'
+import { useAuthStore } from '../../store/authStore'
 
-const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useAuthStore();
+export default function ProtectedRoute({ children }) {
+  const { session, loading } = useAuthStore()
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
+  if (loading) return <div>Cargando...</div>
+  if (!session) return <Navigate to="/login" replace />
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return children;
-};
-
-export default ProtectedRoute;
+  return children
+}
