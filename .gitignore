@@ -23,5 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# .gitignore (asegurar que .env.local no se suba)
-echo ".env.local" >> .gitignore
+.env
+.env.local
