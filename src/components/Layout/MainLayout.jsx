@@ -1,14 +1,18 @@
 // src/components/Layout/MainLayout.jsx
+import { useState } from 'react'
 import Sidebar from './Sidebar'
 
 export default function MainLayout({ children }) {
+  // Estado global del diseño para saber si el menú está encogido o no
+  const [isCollapsed, setIsCollapsed] = useState(false)
+
   return (
-    <div className="flex bg-gray-50 min-h-screen text-gray-800">
-      {/* Pintamos la barra lateral fija */}
-      <Sidebar />
+    <div className="flex min-h-screen bg-gray-50 text-gray-800">
+      {/* Pasamos el estado y la función para cambiarlo al Sidebar */}
+      <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
       
-      {/* Contenedor dinámico donde se renderizará el contenido de cada página */}
-      <main className="flex-1 pl-64 p-8 animate-fade-in">
+      {/* Ajusta dinámicamente el margen izquierdo según el estado del menú */}
+      <main className={`flex-1 p-8 transition-all duration-300 ${isCollapsed ? 'pl-20' : 'pl-64'}`}>
         {children}
       </main>
     </div>
