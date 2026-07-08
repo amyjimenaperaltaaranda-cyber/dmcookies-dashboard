@@ -1,11 +1,14 @@
 // src/pages/Login/Login.jsx
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react' 
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/authStore'
+import HCaptcha from '@hcaptcha/react-hcaptcha' // Componente real conectado
 
 export default function Login() {
   const navigate = useNavigate()
-  
+  const captchaRef = useRef(null) // Referencia para controlar el ciclo de vida del captcha
+  const siteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY 
+
   // Estados locales del formulario
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -24,13 +27,18 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    // Validación estructural básica previa
-    if (!email || !password) return
+    // Validación estructural previa (Exigimos correo, clave y que el captcha esté resuelto)
+    if (!email || !password || !captchaToken) return
 
     // Ejecutamos la función de tu store pasando las variables requeridas
     const result = await login(email, password, captchaToken)
+    
     if (result?.success) {
       navigate('/dashboard')
+    } else {
+      // ⚡ Si el inicio de sesión falla (ej: clave incorrecta), reseteamos el hCaptcha visualmente
+      captchaRef.current?.resetCaptcha()
+      setCaptchaToken(null)
     }
   }
 
@@ -82,28 +90,20 @@ export default function Login() {
             />
           </div>
 
-          {/* ESPACIO TÉCNICO PARA HCAPTCHA */}
-          <div className="flex justify-center py-2 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-            {/* 
-              Aquí tu compañero de diseño o tú insertarán el componente <HCaptcha />.
-              Por ahora simula el comportamiento guardando un token ficticio al interactuar.
-            */}
-            <div className="text-center text-xs text-gray-400 p-2">
-              [ Contenedor Estructural para hCaptcha ]
-              <button 
-                type="button"
-                onClick={() => setCaptchaToken('token_de_prueba_123')}
-                className="block mt-1 mx-auto text-[10px] text-amber-600 underline"
-              >
-                {captchaToken ? '✅ Captcha Resuelto' : 'Simular verificación de Captcha'}
-              </button>
-            </div>
+          {/* ESPACIO REAL PARA INTEGRACIÓN DE HCAPTCHA */}
+          <div className="flex justify-center py-2">
+            <HCaptcha
+              sitekey={siteKey}
+              ref={captchaRef}
+              onVerify={(token) => setCaptchaToken(token)}
+              onExpire={() => setCaptchaToken(null)}
+            />
           </div>
 
           {/* Botón de Envío con Estado de Carga */}
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !captchaToken} // Deshabilitado si está procesando o si no ha marcado el captcha
             className="w-full py-2.5 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50"
           >
             {loading ? 'Procesando ingreso...' : 'Iniciar Sesión'}
