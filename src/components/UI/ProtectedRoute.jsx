@@ -1,11 +1,15 @@
+// src/components/UI/ProtectedRoute.jsx
 import { Navigate } from 'react-router-dom'
-import { useAuthStore } from '../../store/authStore'
+import { useAuthStore } from '../../store/authStore' // Ajusta la ruta de importación si es necesario
 
 export default function ProtectedRoute({ children }) {
-  const { session, loading } = useAuthStore()
+  const session = useAuthStore((state) => state.session)
 
-  if (loading) return <div>Cargando...</div>
-  if (!session) return <Navigate to="/login" replace />
+  // Si no hay una sesión activa, lo mandamos directo al Login
+  if (!session) {
+    return <Navigate to="/login" replace />
+  }
 
+  // Si el usuario está autenticado, lo dejamos pasar a la página
   return children
 }
