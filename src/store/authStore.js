@@ -38,7 +38,7 @@ export const useAuthStore = create((set) => ({
       email,
       password,
       options: {
-        // Aquí se pasa el token de hCaptcha que ya configuraste
+        // Aquí se pasa el token de hCaptcha
         captchaToken: captchaToken, 
       },
     })

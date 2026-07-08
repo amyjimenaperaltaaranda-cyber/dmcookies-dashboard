@@ -1,6 +1,6 @@
 // src/components/UI/ProtectedRoute.jsx
 import { Navigate } from 'react-router-dom'
-import { useAuthStore } from '../../store/authStore' // Ajusta la ruta de importación si es necesario
+import { useAuthStore } from '../../store/authStore' 
 
 export default function ProtectedRoute({ children }) {
   const session = useAuthStore((state) => state.session)
