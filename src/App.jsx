@@ -12,12 +12,12 @@ import Objectives from './pages/Objectives/Objectives'
 import Problematica from './pages/Problematica/Problematica'
 
 function App() {
-  const initializeAuth = useAuthStore((state) => state.initializeAuth) // <-- Nombre nuevo
+  const initializeAuth = useAuthStore((state) => state.initializeAuth)
   const loading = useAuthStore((state) => state.loading)
 
   useEffect(() => {
-    initializeAuth() // <-- Nombre nuevo
-  }, [initializeAuth])
+    initializeAuth()
+}, [initializeAuth])
 
   // 4. Si está verificando la sesión, mostramos un spinner para que no parpadee la pantalla
   if (loading) {
