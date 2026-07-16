@@ -1,23 +1,27 @@
 // src/pages/Login/Login.jsx
-import { useState, useEffect, useRef } from 'react' 
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { useAuthStore } from '../../store/authStore'
-import HCaptcha from '@hcaptcha/react-hcaptcha' // Componente real conectado
+
+import './Login.css'
+
+import logoUniversidad from '../../assets/logos/logo-universidad.svg'
+import logoEscuela from '../../assets/logos/logo-escuela.svg'
+import logoGhostery from '../../assets/logos/logo-ghostery.svg'
+import logoGoogleTrends from '../../assets/logos/logo-google-trends.svg'
 
 export default function Login() {
   const navigate = useNavigate()
-  const captchaRef = useRef(null) // Referencia para controlar el ciclo de vida del captcha
-  const siteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY 
+  const captchaRef = useRef(null)
+  const siteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY
 
-  // Estados locales del formulario
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [captchaToken, setCaptchaToken] = useState(null)
 
-  // Estados globales de tu authStore
   const { login, session, loading, error } = useAuthStore()
 
-  // Si el usuario ya cuenta con sesión activa, lo redirigimos automáticamente al Dashboard
   useEffect(() => {
     if (session) {
       navigate('/dashboard')
@@ -26,91 +30,96 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
-    // Validación estructural previa (Exigimos correo, clave y que el captcha esté resuelto)
-    if (!email || !password || !captchaToken) return
-
-    // Ejecutamos la función de tu store pasando las variables requeridas
-    const result = await login(email, password, captchaToken)
-    
-    if (result?.success) {
-      navigate('/dashboard')
-    } else {
-      // ⚡ Si el inicio de sesión falla (ej: clave incorrecta), reseteamos el hCaptcha visualmente
+    if (!captchaToken) {
+      alert('Completa el CAPTCHA')
+      return
+    }
+    try {
+      const result = await login(email, password, captchaToken)
+      if (result?.success) {
+        navigate('/dashboard')
+      }
+    } catch (err) {
+      console.error("Error al iniciar sesión:", err)
+    } finally {
       captchaRef.current?.resetCaptcha()
       setCaptchaToken(null)
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md">
-        
-        {/* Encabezado del Formulario */}
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold">Panel de Acceso</h1>
-          <p className="text-gray-500 text-sm">Proyecto DMCookies Dashboard</p>
-        </div>
+    <div className="login-layout">
 
-        {/* Alerta de Error Dinámica */}
-        {error && (
-          <div className="mb-4 p-3 bg-red-100 text-red-700 text-sm rounded-lg border border-red-200">
-            ⚠️ {error}
-          </div>
-        )}
+      {/* Capa de ambiente: humo/vapor + partículas, puramente decorativa */}
+      <div className="login-ambient" aria-hidden="true">
+        <span className="login-smoke login-smoke--1" />
+        <span className="login-smoke login-smoke--2" />
+        <span className="login-smoke login-smoke--3" />
+        <span className="login-particle login-particle--1" />
+        <span className="login-particle login-particle--2" />
+        <span className="login-particle login-particle--3" />
+        <span className="login-particle login-particle--4" />
+        <span className="login-particle login-particle--5" />
+      </div>
 
-        {/* Formulario Estructural */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          
-          {/* Campo: Correo Electrónico */}
-          <div>
-            <label className="block text-sm font-medium mb-1">Correo Electrónico</label>
-            <input
-              type="email"
-              required
-              disabled={loading}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="ejemplo@correo.com"
-              className="w-full p-2 border rounded-lg disabled:opacity-50"
-            />
-          </div>
+      {/* Columna izquierda: fuentes de datos */}
+      <div className="login-side login-side--sources">
+        <span className="login-side__label">Fuentes de datos</span>
+        <img src={logoGhostery} alt="Ghostery" className="login-logo login-logo--source login-logo--float" />
+        <img src={logoGoogleTrends} alt="Google Trends" className="login-logo login-logo--source login-logo--float" />
+      </div>
 
-          {/* Campo: Contraseña */}
-          <div>
-            <label className="block text-sm font-medium mb-1">Contraseña</label>
-            <input
-              type="password"
-              required
-              disabled={loading}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="w-full p-2 border rounded-lg disabled:opacity-50"
-            />
-          </div>
+      {/* Centro: formulario de cristal */}
+      <div className="login-form-panel">
+        <form onSubmit={handleSubmit} className="login-form">
+          <h1 className="login-form__title">DMCookies</h1>
+          <p className="login-form__subtitle">Analítica de desinformación en cookies</p>
 
-          {/* ESPACIO REAL PARA INTEGRACIÓN DE HCAPTCHA */}
-          <div className="flex justify-center py-2">
+          {error && (
+            <div className="login-form__error">
+              ⚠️ {error}
+            </div>
+          )}
+
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="Correo"
+            disabled={loading}
+            required
+          />
+
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="Contraseña"
+            disabled={loading}
+            required
+          />
+
+          <div className="login-form__captcha">
             <HCaptcha
-              sitekey={siteKey}
               ref={captchaRef}
-              onVerify={(token) => setCaptchaToken(token)}
+              sitekey={siteKey}
+              onVerify={setCaptchaToken}
               onExpire={() => setCaptchaToken(null)}
             />
           </div>
 
-          {/* Botón de Envío con Estado de Carga */}
-          <button
-            type="submit"
-            disabled={loading || !captchaToken} // Deshabilitado si está procesando o si no ha marcado el captcha
-            className="w-full py-2.5 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50"
-          >
-            {loading ? 'Procesando ingreso...' : 'Iniciar Sesión'}
+          <button type="submit" disabled={loading || !captchaToken}>
+            {loading ? 'Procesando...' : 'Ingresar'}
           </button>
-
         </form>
       </div>
+
+      {/* Columna derecha: logos académicos */}
+      <div className="login-side login-side--academic">
+        <img src={logoUniversidad} alt="Universidad" className="login-logo login-logo--academic login-logo--float" />
+        <img src={logoEscuela} alt="Escuela profesional" className="login-logo login-logo--academic login-logo--float" />
+      </div>
+
     </div>
   )
 }
