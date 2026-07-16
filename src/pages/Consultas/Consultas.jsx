@@ -7,7 +7,7 @@ const ConsultasAnaliticas = () => {
     { 
       id: "CA1", 
       pregunta: "¿Cuántos sitios web rastrean al usuario mediante cookies SameSite=None, analizados por país y por mes?", 
-      embedUrl: "" // Ejemplo: "https://app.powerbi.com/view?r=..."
+      embedUrl: "https://app.powerbi.com/links/snO8JEpkHy?ctid=c5d23b09-af01-4aec-ab74-7a5d1da01084&pbi_source=linkShare" // Ejemplo: "https://app.powerbi.com/view?r=..."
     },
     { 
       id: "CA2", 
