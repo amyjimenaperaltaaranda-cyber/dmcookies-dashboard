@@ -7,23 +7,20 @@ const ConsultasAnaliticas = () => {
     { 
       id: "CA1", 
       pregunta: "¿Cuántos sitios web rastrean al usuario mediante cookies SameSite=None, analizados por país y por mes?", 
-      embedUrl: "https://app.powerbi.com/links/snO8JEpkHy?ctid=c5d23b09-af01-4aec-ab74-7a5d1da01084&pbi_source=linkShare" // Ejemplo: "https://app.powerbi.com/view?r=..."
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiZTdhOTllNzMtOTYyYi00NzNiLWJhZWQtZWUyOTAzMjU5N2ZkIiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9"
     },
     { 
       id: "CA2", 
       pregunta: "¿Cuánto ha crecido el rastreo por fingerprinting en Perú respecto al promedio global, entre 2021 y 2026?", 
-      embedUrl: "" 
-    },
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiN2FmOWFjYzctOGMwMS00MTI2LWJlOTItODg5YzE0NmVlYzRhIiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9"
     { 
       id: "CA3", 
       pregunta: "¿Cuáles son los trackers con mayor reach en la categoría advertising, analizados por trimestre y por país de Latinoamérica?", 
-      embedUrl: "" 
-    },
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiYThkZjgxMzAtYzMyYy00ODNmLWE2NWQtM2RmOWY2NmVmYmFlIiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9"
     { 
       id: "CA4", 
       pregunta: "¿Cuántos KB de datos transfiere cada track por página, clasificado por categoría y país?", 
-      embedUrl: "" 
-    },
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiZGNmZGVhOTctN2ZjMy00N2UwLTliN2YtNDJjNGUwZWUxNjY1IiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9"
     { 
       id: "CA5", 
       pregunta: "¿Cuántas veces más rastrea un tracker de social media comparado con uno de analytics, analizado por mes?", 
@@ -37,13 +34,11 @@ const ConsultasAnaliticas = () => {
     { 
       id: "CA7", 
       pregunta: "¿Cuántos trackers nuevos emergieron entre 2021 y 2026 con mayor crecimiento de reach en Latinoamérica?", 
-      embedUrl: "" 
-    },
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNmU0M2M4MzAtMWQyNi00MDIzLWI3N2UtNWZkZTc5MWRjOGE0IiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9"
     { 
       id: "CA8", 
       pregunta: "¿Cuál es la diferencia de rastreo (tracked) entre Perú y países con GDPR (DE, ES), analizada por trimestre?", 
-      embedUrl: "" 
-    },
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiYThjNjdjOWUtNzZiNi00YTk0LWI2MzMtNDg0ZWMxMjNhZTEwIiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9"
     { 
       id: "CA9", 
       pregunta: "¿Cuántas solicitudes HTTP genera DoubleClick por página en Perú vs el promedio global, por año?", 
