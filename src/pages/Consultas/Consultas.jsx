@@ -57,7 +57,7 @@ const ConsultasAnaliticas = () => {
     { 
       id: "CA11", 
       pregunta: "¿Existe relación entre el índice de desinformación y el nivel de rastreo técnico en Perú?", 
-      embedUrl: "" 
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNTJhMmVkMDYtNmQ5ZC00MDU5LTgyMjQtMDg3N2I3MjY4MDE1IiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9" 
     }
   ];
 
