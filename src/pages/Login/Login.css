@@ -327,7 +327,7 @@
   object-fit: contain !important;
   filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4));
   
-  /* 🌟 Truco de CSS para que el pixel art no se vea borroso al escalar */
+  /* Evita que el navegador emborrone el PNG al renderizarlo */
   image-rendering: pixelated; 
   image-rendering: crisp-edges;
 }

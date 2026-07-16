@@ -9,7 +9,7 @@ import logoUniversidad from '../../assets/logos/logo-universidad.svg'
 import logoEscuela from '../../assets/logos/logo-escuela.svg'
 import logoGhostery from '../../assets/logos/logo-ghostery.svg'
 import logoGoogleTrends from '../../assets/logos/logo-google-trends.svg'
-import logoFavicon from '../../assets/favicon.svg'
+import logoCookie from '../../assets/cookie.png' 
 
 export default function Login() {
   const navigate = useNavigate()
@@ -94,9 +94,9 @@ export default function Login() {
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            {/* Galleta Base (Pixel Art) */}
+            {/* Galleta Base ( Pixel Art PNG) */}
             <div className="cookie-base">
-              <img src={logoFavicon} alt="Cookie Pixel Art" className="cookie-pixel" />
+              <img src={logoCookie} alt="DMCookie Pixel Art" className="cookie-pixel" />
             </div>
 
             {/* Lupa con lente de rayos X (Solo se ve cuando el mouse está encima) */}
