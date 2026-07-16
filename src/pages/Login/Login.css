@@ -1,0 +1,51 @@
+/* Estructura de la carátula en tres columnas */
+.login-cover {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Base para cada columna */
+.login-cover__col {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Distribuye el espacio de forma equitativa */
+}
+
+/* Columna izquierda: Logos alineados al inicio */
+.login-cover__col--left {
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+/* Columna central: Texto principal centrado */
+.login-cover__col--center {
+  align-items: center;
+  text-align: center;
+}
+
+/* Columna derecha: Fuentes alineadas al final */
+.login-cover__col--right {
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.login-cover__fuentes-logos {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* 🌟 Efecto de Sombra Difuminada para las siluetas SVG Blancas */
+.login-logo--shadow {
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.35));
+  transition: filter 0.3s ease;
+}
+
+/* Efecto sutil al pasar el cursor */
+.login-logo--shadow:hover {
+  filter: drop-shadow(0px 6px 12px rgba(0, 0, 0, 0.5));
+}

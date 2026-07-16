@@ -7,12 +7,15 @@ export default function MainLayout({ children }) {
   const [isCollapsed, setIsCollapsed] = useState(false)
 
   return (
-    <div className="flex min-h-screen bg-gray-50 text-gray-800">
+    <div className="flex min-h-screen bg-slate-900 text-gray-100">
       {/* Pasamos el estado y la función para cambiarlo al Sidebar */}
       <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
       
-      {/* Ajusta dinámicamente el margen izquierdo según el estado del menú */}
-      <main className={`flex-1 p-8 transition-all duration-300 ${isCollapsed ? 'pl-20' : 'pl-64'}`}>
+      {/* Borde delgado a la izquierda del contenido, entre sidebar y dashboard */}
+      <main
+        className={`flex-1 transition-all duration-300 ${isCollapsed ? 'pl-20' : 'pl-64'}`}
+        style={{ borderLeft: '1px solid rgba(255,255,255,0.12)' }}
+      >
         {children}
       </main>
     </div>
