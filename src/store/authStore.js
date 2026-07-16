@@ -1,65 +1,69 @@
-// src/store/authStore.js
-import { create } from 'zustand'
-import { supabase } from '../utils/supabaseClient'
+// src/pages/Login/Login.jsx
+import { useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
+import { useAuthStore } from '../../store/authStore'
 
-export const useAuthStore = create((set) => ({
-  user: null,
-  session: null,
-  loading: true,
-  error: null,
+import logoUniversidad from '../../assets/logos/logo-universidad.svg'
+import logoEscuela from '../../assets/logos/logo-escuela.svg'
+import logoGhostery from '../../assets/logos/logo-ghostery.svg'
+import logoGoogleTrends from '../../assets/logos/logo-google-trends.svg'
 
-  // Inicializar y escuchar cambios de sesión automáticos
-  initializeAuth: async () => {
-    set({ loading: true })
-    
-    // 1. Obtener sesión actual al cargar la app
-    const { data: { session } } = await supabase.auth.getSession()
-    set({ 
-      session, 
-      user: session?.user ?? null, 
-      loading: false 
-    })
+export default function Login() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [captchaToken, setCaptchaToken] = useState(null)
+  const captchaRef = useRef(null)
+  const login = useAuthStore((s) => s.login)
+  const navigate = useNavigate()
 
-    // 2. Escuchar cambios en tiempo real (login, logout, token expirado)
-    supabase.auth.onAuthStateChange((_event, session) => {
-      set({ 
-        session, 
-        user: session?.user ?? null, 
-        loading: false 
-      })
-    })
-  },
-
-  // Función para Iniciar Sesión con Email y Contraseña
-  login: async (email, password, captchaToken) => {
-    set({ loading: true, error: null })
-    
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-      options: {
-        // Aquí se pasa el token de hCaptcha
-        captchaToken: captchaToken, 
-      },
-    })
-
-    if (error) {
-      set({ error: error.message, loading: false })
-      return { success: false, error: error.message }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!captchaToken) {
+      alert('Completa el CAPTCHA')
+      return
     }
-
-    set({ session: data.session, user: data.user, loading: false })
-    return { success: true }
-  },
-
-  // Función para Cerrar Sesión
-  logout: async () => {
-    set({ loading: true })
-    const { error } = await supabase.auth.signOut()
-    if (!error) {
-      set({ user: null, session: null, loading: false, error: null })
-    } else {
-      set({ loading: false, error: error.message })
+    try {
+      await login(email, password, captchaToken)
+      navigate('/dashboard')
+    } catch (err) {
+      alert(err.message)
+    } finally {
+      captchaRef.current?.resetCaptcha()
+      setCaptchaToken(null)
     }
   }
-}))
+
+  return (
+    <div className="login-layout">
+      {/* Panel de carátula */}
+      <div className="login-cover">
+        <div className="login-cover__institucional">
+          <img src={logoUniversidad} alt="Universidad" className="login-logo" />
+          <img src={logoEscuela} alt="Escuela profesional" className="login-logo" />
+        </div>
+
+        <div className="login-cover__proyecto">
+          <h1>DMCookies</h1>
+          <p>Analítica de desinformación en cookies</p>
+        </div>
+
+        <div className="login-cover__fuentes">
+          <span className="login-cover__fuentes-label">Fuentes de datos</span>
+          <img src={logoGhostery} alt="Ghostery" className="login-logo login-logo--small" />
+          <img src={logoGoogleTrends} alt="Google Trends" className="login-logo login-logo--small" />
+        </div>
+      </div>
+
+      {/* Panel de formulario */}
+      <div className="login-form-panel">
+        <form onSubmit={handleSubmit} className="login-form">
+          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Correo" required />
+          <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Contraseña" required />
+          <HCaptcha ref={captchaRef} sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY} onVerify={setCaptchaToken} />
+          <button type="submit">Ingresar</button>
+        </form>
+      </div>
+    </div>
+  )
+}
