@@ -235,20 +235,21 @@
 }
 
 /* ==========================================================================
-   RESPONSIVE: CELULAR (Escalado simétrico de logos en móvil)
+   RESPONSIVE: CELULAR (Escalado de logos gigantes en móvil)
    ========================================================================== */
 @media (max-width: 768px) {
   .login-layout {
     flex-direction: column;
     justify-content: flex-start;
-    padding: 2rem 1.25rem;
-    gap: 1.5rem;
+    padding: 2.5rem 1.5rem; /* Un poco más de aire arriba y abajo */
+    gap: 2.5rem;            /* Más espacio de separación entre secciones */
   }
 
+  /* Contenedor de logos académicos en móvil */
   .login-side--academic {
     order: 1;
     flex-direction: row;
-    gap: 1.5rem;
+    gap: 2rem; /* Más separación horizontal entre logos */
   }
 
   .login-form-panel {
@@ -256,26 +257,27 @@
     max-width: 100%;
   }
 
+  /* Contenedor de logos de fuentes en móvil */
   .login-side--sources {
     order: 3;
     flex-direction: row;
-    gap: 1.5rem;
+    gap: 2rem; /* Más separación horizontal entre logos */
   }
 
-  /* Logos académicos en celular: Más grandes y claros */
+  /* 🚀 Logos académicos en celular: ¡Mucho más grandes y vistosos! */
   .login-logo--academic {
-    max-width: 140px !important; /* 🔥 Escalado de 120px a 140px */
-    height: 55px !important;     /* 🔥 Escalado de 48px a 55px */
+    max-width: 160px !important; /* Subido de 140px a 160px */
+    height: 65px !important;     /* Subido de 55px a 65px */
   }
 
-  /* Logos de fuentes en celular: Más grandes y claros */
+  /* 🚀 Logos de fuentes en celular: ¡Mucho más grandes y vistosos! */
   .login-logo--source {
-    max-width: 120px !important; /* 🔥 Escalado de 105px a 120px */
-    height: 48px !important;     /* 🔥 Escalado de 42px a 48px */
+    max-width: 140px !important; /* Subido de 120px a 140px */
+    height: 55px !important;     /* Subido de 48px a 55px */
   }
 
   .login-side__label {
-    display: none;
+    display: none; /* Mantenemos oculto el texto para dar prioridad visual a los logos */
   }
 
   .login-form {
@@ -283,6 +285,123 @@
   }
 
   .login-form__title {
-    font-size: 1.6rem;
+    font-size: 1.8rem; /* Un toque más de presencia al título */
   }
+}
+
+/* ==========================================================================
+   INTERACTIVIDAD: ESCÁNER DE GALLETA (LUPA)
+   ========================================================================== */
+.cookie-scanner {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1.5rem auto;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 176, 90, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none; /* Oculta el cursor nativo para usar la lupa como cursor */
+  overflow: hidden;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* La galleta tradicional flotando suavemente */
+.cookie-base {
+  width: 100px; 
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  animation: cookie-spin 12s linear infinite; /* Un giro un poco más lento para apreciar el pixel art */
+  transition: transform 0.3s ease;
+}
+
+/* Control estricto para que tu SVG se vea nítido y mantenga su estilo pixel art */
+.cookie-pixel {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4));
+  
+  /* 🌟 Truco de CSS para que el pixel art no se vea borroso al escalar */
+  image-rendering: pixelated; 
+  image-rendering: crisp-edges;
+}
+
+@keyframes cookie-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* El cuerpo de la lupa (lente) */
+.scanner-lens {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 3px solid #ffb05a;
+  box-shadow: 
+    0 0 15px rgba(255, 176, 90, 0.6), 
+    inset 0 0 10px rgba(255, 176, 90, 0.4);
+  pointer-events: none; /* Permite que el mouse detecte el contenedor de abajo */
+  z-index: 10;
+  overflow: hidden;
+  transition: opacity 0.2s ease, transform 0.1s ease-out;
+  background: rgba(43, 22, 8, 0.85); /* Tono de fondo oscuro tipo "radiografía" */
+}
+
+/* Añadimos el mango de la lupa usando un pseudoelemento */
+.scanner-lens::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  width: 8px;
+  height: 24px;
+  background: #ffb05a;
+  transform: rotate(-45deg);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(255, 176, 90, 0.6);
+}
+
+/* Contenedor que sincroniza el movimiento inverso de la galleta analizada */
+.scanner-lens__overlay {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* La galleta analizada (Digital / Bytes de seguridad) */
+.cookie-digital {
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-family: 'Courier New', Courier, monospace;
+  color: #ffb05a;
+  text-shadow: 0 0 8px rgba(255, 176, 90, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(255, 176, 90, 0.25) 0%, transparent 70%);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 176, 90, 0.6);
+  animation: radar-sweep 2s linear infinite;
+}
+
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg) scale(0.95); }
+  50% { transform: rotate(180deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(0.95); }
 }
