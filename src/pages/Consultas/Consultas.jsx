@@ -36,12 +36,12 @@ const ConsultasAnaliticas = () => {
     { 
       id: "CA7", 
       pregunta: "¿Cuántos trackers nuevos emergieron entre 2021 y 2026 con mayor crecimiento de reach en Latinoamérica?", 
-      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNmU0M2M4MzAtMWQyNi00MDIzLWI3N2UtNWZkZTc5MWRjOGE0IiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9"
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiYThjNjdjOWUtNzZiNi00YTk0LWI2MzMtNDg0ZWMxMjNhZTEwIiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9"
     }, 
     { 
       id: "CA8", 
       pregunta: "¿Cuál es la diferencia de rastreo (tracked) entre Perú y países con GDPR (DE, ES), analizada por trimestre?", 
-      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiYThjNjdjOWUtNzZiNi00YTk0LWI2MzMtNDg0ZWMxMjNhZTEwIiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9"
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNmU0M2M4MzAtMWQyNi00MDIzLWI3N2UtNWZkZTc5MWRjOGE0IiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9"
     }, 
     { 
       id: "CA9", 
