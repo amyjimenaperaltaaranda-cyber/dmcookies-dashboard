@@ -7,11 +7,11 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   const logout = useAuthStore((state) => state.logout) // Consumimos tu función de cerrar sesión
 
   const menuItems = [
-    { name: 'Dashboard', path: '/dashboard', icon: '📊' },
-    { name: 'Consultas', path: '/consultas', icon: '🔍' },
-    { name: 'Sobre Nosotros', path: '/about', icon: '👥' },
-    { name: 'Objetivos', path: '/objectives', icon: '🎯' },
     { name: 'Problemática', path: '/problematica', icon: '⚠️' },
+    { name: 'Objetivos', path: '/objectives', icon: '🎯' },
+    { name: 'Consultas', path: '/consultas', icon: '🔍' },
+    { name: 'Dashboard', path: '/dashboard', icon: '📊' },
+    { name: 'Sobre Nosotros', path: '/about', icon: '👥' },
   ]
 
   return (
