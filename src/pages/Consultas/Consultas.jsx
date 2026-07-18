@@ -26,12 +26,12 @@ const ConsultasAnaliticas = () => {
     { 
       id: "CA5", 
       pregunta: "¿Cuántas veces más rastrea un tracker de social media comparado con uno de analytics, analizado por mes?", 
-      embedUrl: "" 
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiOWU2ZWZhMTYtZDY4Ny00NTBkLTk3NjctMzBkZDdlYzJmNDA0IiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9" 
     },
     { 
       id: "CA6", 
       pregunta: "¿Qué correlación existe entre el nivel de reach global de un tracker y su uso de fingerprinting, por año?", 
-      embedUrl: "" 
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiMTJmNWRkZWYtMTFiMC00MTBiLWIzOGMtYmY2MTBmNWM5NTRhIiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9" 
     },
     { 
       id: "CA7", 
