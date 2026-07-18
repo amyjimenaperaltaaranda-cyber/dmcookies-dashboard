@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const ConsultasAnaliticas = () => {
-  // Lista de tus consultas analíticas (CA1 a CA11) con la sintaxis corregida
+  // Lista de tus consultas analíticas (CA1 a CA11)
   const consultas = [
     { 
       id: "CA1", 
@@ -62,8 +62,10 @@ const ConsultasAnaliticas = () => {
 
   const [consultaActiva, setConsultaActiva] = useState(consultas[0]);
   const [loading, setLoading] = useState(false);
+  // Nuevo estado para controlar si el sidebar está abierto o contraído
+  const [sidebarAbierto, setSidebarAbierto] = useState(true);
 
-  // Cada vez que el usuario cambie de consulta, activamos temporalmente un estado de carga
+  // Efecto de carga al cambiar de consulta
   useEffect(() => {
     if (consultaActiva.embedUrl) {
       setLoading(true);
@@ -83,44 +85,75 @@ const ConsultasAnaliticas = () => {
       {/* Contenido Principal */}
       <div className="flex flex-1 mt-6 gap-6 overflow-hidden h-[calc(100vh-180px)]">
         
-        {/* Sidebar de Preguntas */}
-        <aside className="w-80 overflow-y-auto flex flex-col gap-2 pr-2 border-r border-slate-800 custom-scrollbar shrink-0">
-          {consultas.map((c) => (
+        {/* Sidebar de Preguntas - Ancho dinámico basado en sidebarAbierto */}
+        <aside 
+          className={`flex flex-col border-r border-slate-800 transition-all duration-300 ease-in-out shrink-0 pr-2 
+            ${sidebarAbierto ? 'w-80' : 'w-20 items-center'}`}
+        >
+          {/* Botón para contraer/expandir */}
+          <div className={`w-full flex pb-4 border-b border-slate-800/50 mb-4 ${sidebarAbierto ? 'justify-end' : 'justify-center'}`}>
             <button
-              key={c.id}
-              onClick={() => {
-                if (consultaActiva.id !== c.id) {
-                  setConsultaActiva(c);
-                }
-              }}
-              className={`flex items-start gap-3 p-3 rounded-lg text-left transition-all duration-200 border ${
-                consultaActiva.id === c.id
-                  ? 'bg-orange-600/10 border-orange-500 text-orange-50' // Estilo Activo
-                  : 'bg-slate-900/50 border-slate-800 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' // Estilo Inactivo
-              }`}
+              onClick={() => setSidebarAbierto(!sidebarAbierto)}
+              className="p-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              title={sidebarAbierto ? "Contraer panel" : "Expandir panel"}
             >
-              <span className={`px-2 py-1 rounded text-xs font-bold shrink-0 transition-colors duration-200 ${
-                consultaActiva.id === c.id ? 'bg-orange-600 text-white' : 'bg-slate-800 text-slate-300'
-              }`}>
-                {c.id}
-              </span>
-              <span className="text-sm line-clamp-3 leading-snug">
-                {c.pregunta}
-              </span>
+              {/* Icono de flecha que rota */}
+              <svg 
+                className={`w-5 h-5 transition-transform duration-300 ${sidebarAbierto ? 'rotate-0' : 'rotate-180'}`} 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+              </svg>
             </button>
-          ))}
+          </div>
+
+          {/* Lista de consultas */}
+          <div className="overflow-y-auto flex flex-col gap-2 w-full custom-scrollbar">
+            {consultas.map((c) => (
+              <button
+                key={c.id}
+                title={!sidebarAbierto ? c.pregunta : ""} // Muestra la pregunta como tooltip si está contraído
+                onClick={() => {
+                  if (consultaActiva.id !== c.id) {
+                    setConsultaActiva(c);
+                  }
+                }}
+                className={`flex items-start rounded-lg text-left transition-all duration-200 border 
+                  ${sidebarAbierto ? 'p-3 gap-3 w-full' : 'p-2 justify-center w-12 mx-auto'} 
+                  ${consultaActiva.id === c.id
+                    ? 'bg-orange-600/10 border-orange-500 text-orange-50' 
+                    : 'bg-slate-900/50 border-slate-800 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
+                  }`}
+              >
+                <span className={`px-2 py-1 rounded text-xs font-bold shrink-0 transition-colors duration-200 ${
+                  consultaActiva.id === c.id ? 'bg-orange-600 text-white' : 'bg-slate-800 text-slate-300'
+                }`}>
+                  {c.id}
+                </span>
+                
+                {/* Texto de la pregunta: se oculta si el sidebar está cerrado */}
+                {sidebarAbierto && (
+                  <span className="text-sm line-clamp-3 leading-snug animate-fade-in">
+                    {c.pregunta}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
         </aside>
 
         {/* Área del Dashboard */}
         <main className="flex-1 flex flex-col gap-4 overflow-hidden h-full">
-          {/* Tarjeta de Pregunta Activa */}
+          {/* Tarjeta de Pregunta Activa (siempre visible arriba del dashboard) */}
           <div className="bg-slate-900/40 p-4 rounded-lg border-l-4 border-orange-500 shrink-0">
             <h3 className="text-orange-500 font-bold text-lg">{consultaActiva.id}</h3>
             <p className="text-slate-200 mt-1 text-sm md:text-base">{consultaActiva.pregunta}</p>
           </div>
 
           {/* Visualizador del Dashboard */}
-          <div className="flex-1 bg-slate-900/20 rounded-xl border border-slate-800/80 overflow-hidden relative flex items-center justify-center">
+          <div className="flex-1 bg-slate-900/20 rounded-xl border border-slate-800/80 overflow-hidden relative flex items-center justify-center shadow-lg">
             
             {consultaActiva.embedUrl ? (
               <>
