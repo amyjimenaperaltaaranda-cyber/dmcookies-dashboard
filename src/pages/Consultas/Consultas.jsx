@@ -46,12 +46,12 @@ const ConsultasAnaliticas = () => {
     { 
       id: "CA9", 
       pregunta: "¿Cuántas solicitudes HTTP genera DoubleClick por página en Perú vs el promedio global, por año?", 
-      embedUrl: "" 
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiYjUwYjdlYmItMjk3Ni00OGE1LWEyNGYtODJlYzgxYzQ0ZjI0IiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9" 
     },
     { 
       id: "CA10", 
       pregunta: "¿Cuándo alcanzará el fingerprinting el mismo nivel de tracked en Perú, proyectado al 2028?", 
-      embedUrl: "" 
+      embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiOWU5ODE3NDAtMGQ5Yi00OWM3LTljNzEtZTUwYmMzYjVmYzdkIiwidCI6ImM1ZDIzYjA5LWFmMDEtNGFlYy1hYjc0LTdhNWQxZGEwMTA4NCJ9" 
     },
     { 
       id: "CA11", 
