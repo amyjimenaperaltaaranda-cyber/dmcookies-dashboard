@@ -1,7 +1,7 @@
 // src/App.jsx
-import { useEffect } from 'react' // 1. Importamos useEffect
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthStore } from './store/authStore' // 2. Importamos tu store de Zustand
+import { useAuthStore } from './store/authStore'
 import ProtectedRoute from './components/UI/ProtectedRoute'
 import MainLayout from './components/Layout/MainLayout'
 import Login from './pages/Login/Login'
@@ -17,9 +17,8 @@ function App() {
 
   useEffect(() => {
     initializeAuth()
-}, [initializeAuth])
+  }, [initializeAuth])
 
-  // 4. Si está verificando la sesión, mostramos un spinner para que no parpadee la pantalla
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
@@ -34,15 +33,28 @@ function App() {
       <Routes>
         {/* Ruta pública */}
         <Route path="/login" element={<Login />} />
-        
-        {/* Rutas privadas */}
-        <Route path="/dashboard" element={<ProtectedRoute><MainLayout><Dashboard /></MainLayout></ProtectedRoute>} />
-        <Route path="/consultas" element={<ProtectedRoute><MainLayout><Consultas /></MainLayout></ProtectedRoute>} />
-        <Route path="/about" element={<ProtectedRoute><MainLayout><About /></MainLayout></ProtectedRoute>} />
-        <Route path="/objectives" element={<ProtectedRoute><MainLayout><Objectives /></MainLayout></ProtectedRoute>} />
-        <Route path="/problematica" element={<ProtectedRoute><MainLayout><Problematica /></MainLayout></ProtectedRoute>} />
 
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        {/* Rutas privadas — flujo del profesor:
+            Login → Problemática → Objetivos → Consultas → Dashboard → Sobre Nosotros */}
+        <Route path="/problematica" element={
+          <ProtectedRoute><MainLayout><Problematica /></MainLayout></ProtectedRoute>
+        } />
+        <Route path="/objectives" element={
+          <ProtectedRoute><MainLayout><Objectives /></MainLayout></ProtectedRoute>
+        } />
+        <Route path="/consultas" element={
+          <ProtectedRoute><MainLayout><Consultas /></MainLayout></ProtectedRoute>
+        } />
+        <Route path="/dashboard" element={
+          <ProtectedRoute><MainLayout><Dashboard /></MainLayout></ProtectedRoute>
+        } />
+        <Route path="/about" element={
+          <ProtectedRoute><MainLayout><About /></MainLayout></ProtectedRoute>
+        } />
+
+        {/* Raíz redirige al login */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   )
