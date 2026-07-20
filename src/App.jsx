@@ -21,9 +21,24 @@ function App() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500"></div>
-        <span className="ml-3 font-medium">Verificando sesión...</span>
+      <div
+        className="flex flex-col items-center justify-center min-h-screen text-white gap-4"
+        style={{
+          background:
+            'radial-gradient(circle at 50% 40%, rgba(255, 176, 90, 0.18), transparent 55%), linear-gradient(160deg, #2b1608 0%, #3b1f0d 35%, #1c0e05 100%)',
+        }}
+      >
+        <svg viewBox="0 0 100 100" className="w-16 h-16" style={{ animation: 'spin 2.6s linear infinite' }}>
+          <circle cx="50" cy="50" r="42" fill="#d9922f" stroke="#8a520d" strokeWidth="4" />
+          <path d="M 80 22 Q 93 34 85 54 Q 73 49 80 22 Z" fill="#1c0e05" />
+          <circle cx="34" cy="34" r="5.5" fill="#5c3317" />
+          <circle cx="60" cy="28" r="4" fill="#5c3317" />
+          <circle cx="66" cy="62" r="5" fill="#5c3317" />
+          <circle cx="38" cy="65" r="4.5" fill="#5c3317" />
+          <circle cx="52" cy="48" r="3.5" fill="#5c3317" />
+          <circle cx="26" cy="52" r="3" fill="#5c3317" />
+        </svg>
+        <span className="font-medium tracking-wide">Horneando tu sesión...</span>
       </div>
     )
   }
