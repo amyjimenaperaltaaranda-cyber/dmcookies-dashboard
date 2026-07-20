@@ -1,4 +1,25 @@
+import { useState } from 'react'
 import { AlertTriangle, Globe, MapPin, Flag, Mountain, ChevronRight } from 'lucide-react'
+
+// Indicadores de la variable problema, con su descripción para el tooltip
+const indicadores = [
+  {
+    clave: 'tracked',
+    descripcion: 'Porcentaje en decimales por página donde el rastreador identificó al usuario y envió esa información a los servidores de su empresa de forma exitosa, sin que el usuario se dé cuenta de que esto ocurrió.',
+  },
+  {
+    clave: 'reach',
+    descripcion: 'Porcentaje en decimales por página el cual muestra el total de veces que el usuario o el tráfico de internet encontró a este rastreador.',
+  },
+  {
+    clave: 'cookie_samesite_none',
+    descripcion: 'Mide, en porcentaje en decimales por página, cuántas páginas admiten SameSite = None (osea un seguimiento corporativo masivo en toda página que tenga esta configuración habilitada).',
+  },
+  {
+    clave: 'site_reach',
+    descripcion: 'Mide, en porcentaje en decimales por página, si un rastreador aparece en muchas páginas web diferentes o si se encuentra concentrado únicamente en unas pocas páginas específicas.',
+  },
+]
 
 const niveles = [
   {
@@ -40,6 +61,8 @@ const colorMap = {
 }
 
 export default function Problematica() {
+  const [tipAbierto, setTipAbierto] = useState(null)
+
   return (
     <div className="max-w-4xl mx-auto px-6 py-10">
 
@@ -67,11 +90,22 @@ export default function Problematica() {
           Definida como el grado en que los sitios web instalan cookies con capacidad de transmisión
           de identificadores de usuario sin que dicho usuario comprenda realmente lo que acepta.
         </p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {['tracked', 'reach', 'cookie_samesite_none', 'site_reach'].map((ind) => (
-            <div key={ind} className="rounded-lg px-3 py-2 text-center" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(230,172,92,0.25)' }}>
-              <p className="text-xs font-mono" style={{ color: '#ffb05a' }}>{ind}</p>
-              <p className="text-xs mt-0.5" style={{ color: '#a9885f' }}>indicador</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {indicadores.map((ind) => (
+            <div
+              key={ind.clave}
+              className="indicator-cookie-card group relative rounded-lg px-3 py-3 text-center cursor-pointer"
+              onClick={() => setTipAbierto(tipAbierto === ind.clave ? null : ind.clave)}
+              role="button"
+              tabIndex={0}
+              aria-label={`Indicador ${ind.clave}: ${ind.descripcion}`}
+            >
+              <p className="text-xs font-mono font-bold" style={{ color: '#7a3410' }}>{ind.clave}</p>
+              <p className="text-xs mt-0.5" style={{ color: '#8a6a45' }}>indicador</p>
+
+              <div className={`indicator-tooltip ${tipAbierto === ind.clave ? 'indicator-tooltip--open' : ''}`}>
+                {ind.descripcion}
+              </div>
             </div>
           ))}
         </div>
