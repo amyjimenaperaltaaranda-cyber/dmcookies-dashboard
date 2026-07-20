@@ -1,0 +1,60 @@
+/* ==========================================================================
+   FONDO TEMÁTICO "GALLETA/HORNO" PARA LAS PÁGINAS INTERNAS
+   ========================================================================== */
+
+.flex.min-h-screen.bg-slate-900.text-gray-100,
+.overflow-y-auto.bg-slate-900.text-slate-50.min-h-screen.w-full,
+.flex.flex-col.h-screen.text-slate-200.p-6.bg-slate-950 {
+  position: relative;
+  isolation: isolate;
+
+  background-color: #1c0e05 !important;
+  background-image:
+    radial-gradient(circle at 50% 20%, rgba(255, 176, 90, 0.14), transparent 55%),
+    linear-gradient(160deg, #2b1608 0%, #3b1f0d 35%, #1c0e05 100%) !important;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.flex.min-h-screen.bg-slate-900.text-gray-100::before,
+.overflow-y-auto.bg-slate-900.text-slate-50.min-h-screen.w-full::before,
+.flex.flex-col.h-screen.text-slate-200.p-6.bg-slate-950::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(255, 176, 90, 0.16) 0, rgba(255, 176, 90, 0) 3px),
+    radial-gradient(circle at 68% 12%, rgba(255, 176, 90, 0.14) 0, rgba(255, 176, 90, 0) 2.5px),
+    radial-gradient(circle at 40% 55%, rgba(255, 176, 90, 0.13) 0, rgba(255, 176, 90, 0) 3px),
+    radial-gradient(circle at 88% 45%, rgba(255, 176, 90, 0.12) 0, rgba(255, 176, 90, 0) 2px),
+    radial-gradient(circle at 22% 82%, rgba(255, 176, 90, 0.14) 0, rgba(255, 176, 90, 0) 2.5px),
+    radial-gradient(circle at 78% 88%, rgba(255, 176, 90, 0.11) 0, rgba(255, 176, 90, 0) 2px),
+    radial-gradient(circle at 55% 32%, rgba(255, 176, 90, 0.10) 0, rgba(255, 176, 90, 0) 2px);
+  background-size: 260px 260px;
+  background-repeat: repeat;
+  animation: cookie-crumbs-drift 40s linear infinite;
+}
+
+@keyframes cookie-crumbs-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 260px 260px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flex.min-h-screen.bg-slate-900.text-gray-100::before,
+  .overflow-y-auto.bg-slate-900.text-slate-50.min-h-screen.w-full::before,
+  .flex.flex-col.h-screen.text-slate-200.p-6.bg-slate-950::before {
+    animation: none;
+  }
+}
+
+.flex.min-h-screen.bg-slate-900.text-gray-100 > main,
+.overflow-y-auto.bg-slate-900.text-slate-50.min-h-screen.w-full > *,
+.flex.flex-col.h-screen.text-slate-200.p-6.bg-slate-950 > * {
+  position: relative;
+  z-index: 1;
+}
