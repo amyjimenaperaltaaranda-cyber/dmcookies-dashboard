@@ -1,5 +1,4 @@
-/* ==========================================================================
-   SIDEBAR — masa de galleta vívida con chispas de chocolate
+/* SIDEBAR — masa de galleta vívida con chispas de chocolate
    ========================================================================== */
 .sidebar-cookie {
   isolation: isolate;
@@ -53,8 +52,7 @@
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* ==========================================================================
-   INSIGNIAS DE ÍCONOS — mini "galleta" decorativa detrás de cada ícono
+/* INSIGNIAS DE ÍCONOS — mini "galleta" decorativa detrás de cada ícono
    ========================================================================== */
 .icon-cookie-badge {
   position: relative;
