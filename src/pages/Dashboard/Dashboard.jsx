@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { LayoutDashboard } from 'lucide-react';
 import DashboardFilters from '../../components/Dashboard/DashboardFilters';
 import KpiCards from '../../components/Dashboard/KpiCards';
 import MainLineChart from '../../components/Dashboard/MainLineChart';
@@ -18,12 +17,9 @@ export default function Dashboard() {
         {/* Título arriba a la izquierda */}
         <header className="flex items-center justify-between">
           <div>
-            <div className="flex items-center gap-3">
-              <LayoutDashboard size={28} className="text-[#ffb05a]" />
-              <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-500 tracking-tight">
-                Panel de Control
-              </h1>
-            </div>
+            <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-500 tracking-tight">
+              Panel de Control
+            </h1>
             <p className="mt-1 font-medium" style={{ color: '#c9a479' }}>Análisis de privacidad y rastreo de cookies.</p>
           </div>
           <div className="flex items-center gap-3 text-sm px-4 py-2 rounded-full" style={{ color: '#c9a479', background: 'rgba(43,22,8,0.5)', border: '1px solid rgba(230,172,92,0.25)' }}>
