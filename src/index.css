@@ -3,6 +3,7 @@
 /* 1. Importar Tailwind PRIMERO (para no sobrescribir tus variables) */
 @import './styles/cookie-pages-bg.css';
 @import './styles/sidebar-theme.css';
+@import './styles/components-cookie.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
