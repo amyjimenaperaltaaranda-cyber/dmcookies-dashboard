@@ -10,6 +10,7 @@ import Consultas from './pages/Consultas/Consultas'
 import About from './pages/About/About'
 import Objectives from './pages/Objectives/Objectives'
 import Problematica from './pages/Problematica/Problematica'
+import DataDictionary from './pages/DataDictionary/DataDictionary'
 
 function App() {
   const initializeAuth = useAuthStore((state) => state.initializeAuth)
@@ -65,6 +66,9 @@ function App() {
         } />
         <Route path="/about" element={
           <ProtectedRoute><MainLayout><About /></MainLayout></ProtectedRoute>
+        } />
+        <Route path="/diccionario" element={
+          <ProtectedRoute><MainLayout><DataDictionary /></MainLayout></ProtectedRoute>
         } />
 
         {/* Raíz redirige al login */}
