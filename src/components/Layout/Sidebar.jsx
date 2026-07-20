@@ -21,17 +21,17 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   ]
 
   return (
-    <div className={`h-screen bg-gray-900 text-white fixed left-0 top-0 p-4 flex flex-col justify-between transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-56'}`}>
+    <div className={`sidebar-cookie relative z-50 h-screen text-white fixed left-0 top-0 p-4 flex flex-col justify-between transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-56'}`}>
 
       {/* PARTE SUPERIOR: Logo y Botón de Colapso */}
       <div>
-        <div className="flex items-center justify-between mb-8 px-2 py-2 border-b border-gray-700">
+        <div className="flex items-center justify-between mb-8 px-2 py-2 border-b border-black/25">
           {!isCollapsed && (
-            <span className="font-bold text-lg">DMCookies 🍪</span>
+            <span className="font-bold text-lg drop-shadow-sm">DMCookies 🍪</span>
           )}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="p-1.5 rounded bg-gray-800 hover:bg-gray-700 text-sm"
+            className="p-1.5 rounded bg-black/25 hover:bg-black/40 text-sm transition-colors"
             title={isCollapsed ? 'Expandir menú' : 'Colapsar menú'}
           >
             {isCollapsed ? '▶' : '◀'}
@@ -46,19 +46,21 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors
+                className={`group flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors
                   ${isActive
-                    ? 'bg-amber-500 text-white font-semibold'
-                    : 'hover:bg-gray-800 text-gray-300 hover:text-white'
+                    ? 'bg-[#3b1f0d]/90 text-white font-semibold shadow-inner'
+                    : 'hover:bg-black/20 text-white/85 hover:text-white'
                   }`}
                 title={isCollapsed ? item.name : ''}
               >
-                <img
-                  src={item.icon}
-                  alt={item.name}
-                  className="w-5 h-5 flex-shrink-0"
-                  style={{ filter: isActive ? 'brightness(0) invert(1)' : 'none' }}
-                />
+                <span className={`icon-cookie-badge flex items-center justify-center w-8 h-8 flex-shrink-0 ${isActive ? 'icon-cookie-badge--active' : ''}`}>
+                  <img
+                    src={item.icon}
+                    alt={item.name}
+                    className="w-4 h-4"
+                    style={{ filter: isActive ? 'brightness(0)' : 'none' }}
+                  />
+                </span>
                 {!isCollapsed && (
                   <span className="text-sm">{item.name}</span>
                 )}
@@ -71,7 +73,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
       {/* PARTE INFERIOR: Botón cerrar sesión */}
       <button
         onClick={logout}
-        className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-red-900 hover:text-white transition-colors w-full"
+        className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/80 hover:bg-red-900/80 hover:text-white transition-colors w-full"
       >
         <span className="text-lg">🚪</span>
         {!isCollapsed && <span className="text-sm">Cerrar sesión</span>}
