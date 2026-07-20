@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ChevronUp, ChevronDown } from 'lucide-react';
 
 const ConsultasAnaliticas = () => {
   // Lista de tus consultas analíticas (CA1 a CA11)
@@ -64,6 +65,8 @@ const ConsultasAnaliticas = () => {
   const [loading, setLoading] = useState(false);
   // Nuevo estado para controlar si el sidebar está abierto o contraído
   const [sidebarAbierto, setSidebarAbierto] = useState(true);
+  // Estado para plegar/desplegar el encabezado (título + sinopsis) y darle más espacio al Power BI
+  const [headerAbierto, setHeaderAbierto] = useState(true);
 
   // Efecto de carga al cambiar de consulta
   useEffect(() => {
@@ -74,16 +77,31 @@ const ConsultasAnaliticas = () => {
 
   return (
     <div className="flex flex-col h-screen text-slate-200 p-6 bg-slate-950">
-      {/* Cabecera */}
-      <header className="py-4 border-b border-slate-800 shrink-0">
-        <h1 className="text-3xl font-bold text-white">Dashboards Analíticos</h1>
-        <p className="mt-2 text-slate-400">
-          Explora los resultados interactivos de nuestra investigación sobre la desinformación de las cookies en el usuario peruano.
-        </p>
+      {/* Cabecera plegable */}
+      <header className={`border-b border-slate-800 shrink-0 transition-all duration-300 ${headerAbierto ? 'py-4' : 'py-2.5'}`}>
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <h1 className="text-3xl font-bold text-white">Dashboards Analíticos</h1>
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${headerAbierto ? 'max-h-20 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'}`}
+            >
+              <p className="text-slate-400">
+                Explora los resultados interactivos de nuestra investigación sobre la desinformación de las cookies en el usuario peruano.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setHeaderAbierto(!headerAbierto)}
+            className="shrink-0 p-1.5 mt-1 rounded-lg bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            title={headerAbierto ? "Contraer descripción" : "Expandir descripción"}
+          >
+            {headerAbierto ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+          </button>
+        </div>
       </header>
 
       {/* Contenido Principal */}
-      <div className="flex flex-1 mt-6 gap-6 overflow-hidden h-[calc(100vh-180px)]">
+      <div className="flex flex-1 mt-6 gap-6 overflow-hidden min-h-0">
         
         {/* Sidebar de Preguntas - Ancho dinámico basado en sidebarAbierto */}
         <aside 
