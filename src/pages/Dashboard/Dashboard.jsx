@@ -17,13 +17,13 @@ export default function Dashboard() {
         {/* Título arriba a la izquierda */}
         <header className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 tracking-tight">
+            <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-500 tracking-tight">
               Panel de Control
             </h1>
-            <p className="text-slate-400 mt-1 font-medium">Análisis de privacidad y rastreo de cookies.</p>
+            <p className="mt-1 font-medium" style={{ color: '#c9a479' }}>Análisis de privacidad y rastreo de cookies.</p>
           </div>
-          <div className="flex items-center gap-3 text-sm text-slate-400 bg-slate-800/50 px-4 py-2 rounded-full border border-slate-700/50">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <div className="flex items-center gap-3 text-sm px-4 py-2 rounded-full" style={{ color: '#c9a479', background: 'rgba(43,22,8,0.5)', border: '1px solid rgba(230,172,92,0.25)' }}>
+            <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#e0973f' }}></span>
             {loading ? 'Cargando datos...' : 'Datos en tiempo real'}
           </div>
         </header>
