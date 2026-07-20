@@ -20,7 +20,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: -1; /* negativo: garantiza que quede debajo de TODO sin tener que "subir" ningún otro elemento */
   pointer-events: none;
 
   background-image:
@@ -47,11 +47,4 @@
   .flex.flex-col.h-screen.text-slate-200.p-6.bg-slate-950::before {
     animation: none;
   }
-}
-
-.flex.min-h-screen.bg-slate-900.text-gray-100 > main,
-.overflow-y-auto.bg-slate-900.text-slate-50.min-h-screen.w-full > *,
-.flex.flex-col.h-screen.text-slate-200.p-6.bg-slate-950 > * {
-  position: relative;
-  z-index: 1;
 }
