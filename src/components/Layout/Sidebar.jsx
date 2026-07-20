@@ -21,7 +21,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   ]
 
   return (
-    <div className={`sidebar-cookie relative z-50 h-screen text-white fixed left-0 top-0 p-4 flex flex-col justify-between transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-56'}`}>
+    <div className={`sidebar-cookie z-50 h-screen text-white fixed left-0 top-0 p-4 flex flex-col justify-between transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-56'}`}>
 
       {/* PARTE SUPERIOR: Logo y Botón de Colapso */}
       <div>
@@ -73,9 +73,22 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
       {/* PARTE INFERIOR: Botón cerrar sesión */}
       <button
         onClick={logout}
-        className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/80 hover:bg-red-900/80 hover:text-white transition-colors w-full"
+        className="cookie-door-btn group flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/80 hover:bg-red-900/80 hover:text-white transition-colors w-full"
       >
-        <span className="text-lg">🚪</span>
+        <span className="cookie-door" aria-hidden="true">
+          <svg viewBox="0 0 40 40" className="cookie-door-food">
+            <circle cx="20" cy="19" r="12" fill="#f0c674" stroke="#c1892f" strokeWidth="1" />
+            <path d="M 30 12 Q 34 19 30 27 Q 26 22 30 12 Z" fill="#1c0e05" />
+            <circle cx="25" cy="13" r="1.6" fill="#5c3317" />
+            <circle cx="15" cy="15" r="1.4" fill="#5c3317" />
+            <circle cx="13" cy="24" r="1.6" fill="#5c3317" />
+            <circle cx="22" cy="26" r="1.3" fill="#5c3317" />
+          </svg>
+          <svg viewBox="0 0 40 40" className="cookie-door-panel">
+            <rect x="3" y="2" width="25" height="36" rx="7" fill="#b8721e" stroke="#3b1f0d" strokeWidth="2" />
+            <circle cx="23" cy="20" r="2.2" fill="#3b1f0d" />
+          </svg>
+        </span>
         {!isCollapsed && <span className="text-sm">Cerrar sesión</span>}
       </button>
 
