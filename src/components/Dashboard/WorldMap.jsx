@@ -27,14 +27,14 @@ const COUNTRY_COORDS = {
   CO: [ -74.08,    4.71],  // Bogotá
 };
 
-// ─── Colour palette by region ─────────────────────────────────────────────────
+// ─── Colour palette by region — tonos "galleta" (antes azul/verde/naranja/violeta) ──
 const REGION_COLORS = {
-  'Europa':        { bg: '#3b82f6', glow: '#60a5fa', text: '#bfdbfe', ring: '#3b82f655' },
-  'Latinoamérica': { bg: '#10b981', glow: '#34d399', text: '#a7f3d0', ring: '#10b98155' },
-  'Norteamérica':  { bg: '#f59e0b', glow: '#fbbf24', text: '#fde68a', ring: '#f59e0b55' },
-  'Global':        { bg: '#8b5cf6', glow: '#a78bfa', text: '#ddd6fe', ring: '#8b5cf655' },
+  'Europa':        { bg: '#c9973f', glow: '#e6b566', text: '#fde9c8', ring: '#c9973f55' }, // miel
+  'Latinoamérica': { bg: '#8a520d', glow: '#b8721e', text: '#f0cf8e', ring: '#8a520d55' }, // caramelo
+  'Norteamérica':  { bg: '#6b3410', glow: '#8a4a12', text: '#e3c9a0', ring: '#6b341055' }, // chocolate
+  'Global':        { bg: '#a8571f', glow: '#c9713a', text: '#f3ddb0', ring: '#a8571f55' }, // canela
 };
-const DEFAULT_COLOR = { bg: '#6b7280', glow: '#9ca3af', text: '#e5e7eb', ring: '#6b728055' };
+const DEFAULT_COLOR = { bg: '#7a5c3e', glow: '#9c7a54', text: '#e5d9c5', ring: '#7a5c3e55' };
 
 function getCol(region) { return REGION_COLORS[region] || DEFAULT_COLOR; }
 
@@ -46,10 +46,10 @@ function MetricBar({ label, value, max = 100, color }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10 }}>
-        <span style={{ color: '#94a3b8' }}>{label}</span>
+        <span style={{ color: '#c9a479' }}>{label}</span>
         <span style={{ color, fontWeight: 700 }}>{value != null ? value : 'N/A'}</span>
       </div>
-      <div style={{ height: 3, background: '#1e293b', borderRadius: 99, overflow: 'hidden' }}>
+      <div style={{ height: 3, background: '#3b1f0d', borderRadius: 99, overflow: 'hidden' }}>
         <div style={{ width: `${pct}%`, height: '100%', background: color, borderRadius: 99, transition: 'width .4s ease' }} />
       </div>
     </div>
@@ -74,7 +74,7 @@ function Tooltip({ country, screenPos, svgRect }) {
     <div style={{
       position: 'absolute', left, top,
       width: tipW, pointerEvents: 'none', zIndex: 50,
-      background: 'rgba(8,18,36,0.97)',
+      background: 'rgba(43,22,8,0.97)',
       border: `1px solid ${col.ring}`,
       borderRadius: 14,
       padding: '12px 14px',
@@ -85,7 +85,7 @@ function Tooltip({ country, screenPos, svgRect }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
         <span style={{ fontSize: 22, lineHeight: 1 }}>{FLAGS[country.codigo_pais] || '🌐'}</span>
         <div style={{ flex: 1 }}>
-          <div style={{ color: '#f1f5f9', fontWeight: 700, fontSize: 13 }}>{country.nombre_pais}</div>
+          <div style={{ color: '#fff3d6', fontWeight: 700, fontSize: 13 }}>{country.nombre_pais}</div>
           <div style={{ color: col.glow, fontSize: 10, fontWeight: 600 }}>{country.region}</div>
         </div>
         {country.tiene_gdpr
@@ -94,16 +94,16 @@ function Tooltip({ country, screenPos, svgRect }) {
         }
       </div>
       {/* Divider */}
-      <div style={{ height: 1, background: 'rgba(255,255,255,0.06)', marginBottom: 8 }} />
+      <div style={{ height: 1, background: 'rgba(255,255,255,0.08)', marginBottom: 8 }} />
       {/* Metrics */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <MetricBar label="Cookies Internet"  value={country.cookies_internet}  color="#60a5fa" />
-        <MetricBar label="Privacidad Online"  value={country.privacidad_online} color="#34d399" />
-        <MetricBar label="Datos Personales"   value={country.datos_personales}  color="#a78bfa" />
+        <MetricBar label="Cookies Internet"  value={country.cookies_internet}  color="#e6b566" />
+        <MetricBar label="Privacidad Online"  value={country.privacidad_online} color="#b8721e" />
+        <MetricBar label="Datos Personales"   value={country.datos_personales}  color="#c9713a" />
         <MetricBar
           label="Tasa de Rastreo (%)"
           value={country.tracked != null ? (country.tracked * 100).toFixed(1) : null}
-          color="#fb923c"
+          color="#8a4a12"
         />
       </div>
     </div>
@@ -145,30 +145,30 @@ export default function WorldMap({ mapData = [], loading }) {
     <div
       id="world-map-section"
       style={{
-        background: 'linear-gradient(135deg,rgba(15,23,42,.97) 0%,rgba(17,34,85,.92) 60%,rgba(15,23,42,.97) 100%)',
-        border: '1px solid rgba(59,130,246,.2)',
+        background: 'radial-gradient(circle at 25% 0%, rgba(255,214,153,0.35), transparent 60%), linear-gradient(160deg, #e0973f 0%, #c17817 45%, #8a520d 100%)',
+        border: '1px solid rgba(255,214,153,0.35)',
         borderRadius: 22,
         padding: 24,
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Background orb */}
+      {/* Background glow */}
       <div style={{
         position:'absolute', top:-100, right:-100, width:350, height:350,
-        background:'radial-gradient(circle,rgba(59,130,246,.07) 0%,transparent 70%)',
+        background:'radial-gradient(circle,rgba(255,217,138,.45) 0%,transparent 70%)',
         borderRadius:'50%', pointerEvents:'none',
       }} />
 
       {/* ── Header ─────────────────────────────────────── */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:18, flexWrap:'wrap', gap:12 }}>
         <div style={{ display:'flex', alignItems:'center', gap:12 }}>
-          <div style={{ padding:8, background:'rgba(59,130,246,.12)', borderRadius:10, display:'flex' }}>
-            <Globe size={20} color="#60a5fa" />
+          <div style={{ padding:8, background:'rgba(43,22,8,.22)', borderRadius:10, display:'flex' }}>
+            <Globe size={20} color="#fff3d6" />
           </div>
           <div>
-            <h2 style={{ color:'#f1f5f9', fontWeight:700, fontSize:16, margin:0 }}>Países Monitoreados</h2>
-            <p style={{ color:'#64748b', fontSize:12, margin:'2px 0 0' }}>
+            <h2 style={{ color:'#fff3d6', fontWeight:700, fontSize:16, margin:0, textShadow:'0 1px 3px rgba(0,0,0,0.4)' }}>Países Monitoreados</h2>
+            <p style={{ color:'#f3ddb0', fontSize:12, margin:'2px 0 0' }}>
               {loading ? 'Cargando…' : `${visibleCodes.length} países · Pasa el cursor para ver métricas`}
             </p>
           </div>
@@ -179,7 +179,7 @@ export default function WorldMap({ mapData = [], loading }) {
           {Object.entries(REGION_COLORS).filter(([r]) => r !== 'Global').map(([region, col]) => (
             <div key={region} style={{ display:'flex', alignItems:'center', gap:6 }}>
               <div style={{ width:9, height:9, borderRadius:'50%', background:col.bg, boxShadow:`0 0 7px ${col.glow}` }} />
-              <span style={{ color:col.text, fontSize:11, fontWeight:600 }}>{region}</span>
+              <span style={{ color:'#fff3d6', fontSize:11, fontWeight:600, textShadow:'0 1px 2px rgba(0,0,0,0.3)' }}>{region}</span>
             </div>
           ))}
         </div>
@@ -188,7 +188,7 @@ export default function WorldMap({ mapData = [], loading }) {
       {/* ── Map SVG ────────────────────────────────────── */}
       <div
         ref={svgRef}
-        style={{ position:'relative', borderRadius:14, overflow:'hidden', background:'#050e1d', border:'1px solid rgba(59,130,246,.12)' }}
+        style={{ position:'relative', borderRadius:14, overflow:'hidden', background:'#fff3d6', border:'1px solid rgba(139,90,20,.25)' }}
         onMouseLeave={() => setHovered(null)}
       >
         <svg
@@ -197,11 +197,11 @@ export default function WorldMap({ mapData = [], loading }) {
         >
           <defs>
             <radialGradient id="oceanGrad" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"   stopColor="#061220" />
-              <stop offset="100%" stopColor="#030810" />
+              <stop offset="0%"   stopColor="#fff8e8" />
+              <stop offset="100%" stopColor="#f0cf8e" />
             </radialGradient>
             <filter id="landShadow">
-              <feDropShadow dx="0" dy="1" stdDeviation="1.5" floodColor="#000" floodOpacity="0.5" />
+              <feDropShadow dx="0" dy="1" stdDeviation="1.5" floodColor="#3b1f0d" floodOpacity="0.35" />
             </filter>
             <filter id="pinBloom">
               <feGaussianBlur stdDeviation="3" result="blur" />
@@ -209,7 +209,7 @@ export default function WorldMap({ mapData = [], loading }) {
             </filter>
           </defs>
 
-          {/* Ocean */}
+          {/* Ocean (masa de galleta) */}
           <path d={sphere} fill="url(#oceanGrad)" />
 
           {/* Graticule (subtle grid) */}
@@ -218,29 +218,29 @@ export default function WorldMap({ mapData = [], loading }) {
             const p2 = projection([ 180, lat]);
             if (!p1 || !p2) return null;
             return <line key={`lat${lat}`} x1={p1[0]} y1={p1[1]} x2={p2[0]} y2={p2[1]}
-              stroke={lat === 0 ? 'rgba(59,130,246,.15)' : 'rgba(255,255,255,.035)'}
+              stroke={lat === 0 ? 'rgba(139,74,26,.3)' : 'rgba(139,74,26,.09)'}
               strokeWidth={lat === 0 ? 1 : 0.5} strokeDasharray={lat === 0 ? '4 4' : '0'} />;
           })}
           {[-120,-60,0,60,120].map(lon => {
             const pts = Array.from({length:50},(_,i) => projection([lon, -90 + i*3.6])).filter(Boolean);
             const d = pts.map((p,i) => `${i===0?'M':'L'}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
-            return <path key={`lon${lon}`} d={d} fill="none" stroke="rgba(255,255,255,.03)" strokeWidth="0.5" />;
+            return <path key={`lon${lon}`} d={d} fill="none" stroke="rgba(139,74,26,.06)" strokeWidth="0.5" />;
           })}
 
-          {/* Countries */}
+          {/* Countries (trocitos de chocolate) */}
           {countries.map(c => (
             <path
               key={c.id}
               d={pathGen(c)}
-              fill="#0f2240"
-              stroke="#1a3a60"
+              fill="#6b3410"
+              stroke="#8a520d"
               strokeWidth="0.4"
               filter="url(#landShadow)"
             />
           ))}
 
           {/* Ocean sphere outline */}
-          <path d={sphere} fill="none" stroke="rgba(59,130,246,.18)" strokeWidth="1" />
+          <path d={sphere} fill="none" stroke="rgba(139,74,26,.35)" strokeWidth="1" />
 
           {/* ── Country Pins ── */}
           {visibleCodes.map(code => {
@@ -278,7 +278,7 @@ export default function WorldMap({ mapData = [], loading }) {
                 <circle
                   cx={px} cy={py} r={R}
                   fill={col.bg}
-                  stroke={isHov ? '#fff' : col.glow}
+                  stroke={isHov ? '#3b1f0d' : col.glow}
                   strokeWidth={isHov ? 2 : 1.5}
                   style={{ transition: 'r .15s ease, stroke .15s ease' }}
                   filter="url(#pinBloom)"
@@ -287,12 +287,12 @@ export default function WorldMap({ mapData = [], loading }) {
                 {/* GDPR dot */}
                 {country?.tiene_gdpr && (
                   <circle cx={px + R * 0.65} cy={py - R * 0.65} r={3}
-                    fill="#10b981" stroke="#030810" strokeWidth="1" />
+                    fill="#15803d" stroke="#fff3d6" strokeWidth="1" />
                 )}
 
                 {/* Country code */}
                 <text x={px} y={py + R + 11} textAnchor="middle"
-                  fill={col.text} fontSize={isHov ? 9 : 8} fontWeight="700"
+                  fill="#3b1f0d" fontSize={isHov ? 9 : 8} fontWeight="700"
                   style={{ userSelect:'none', letterSpacing:.5 }}>
                   {code}
                 </text>
@@ -307,13 +307,13 @@ export default function WorldMap({ mapData = [], loading }) {
         {/* Loading overlay */}
         {loading && (
           <div style={{
-            position:'absolute', inset:0, background:'rgba(3,8,16,.75)',
+            position:'absolute', inset:0, background:'rgba(255,243,214,.85)',
             display:'flex', alignItems:'center', justifyContent:'center',
             backdropFilter:'blur(3px)', borderRadius:14,
           }}>
             <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12 }}>
-              <div style={{ width:36, height:36, border:'3px solid rgba(59,130,246,.2)', borderTopColor:'#3b82f6', borderRadius:'50%', animation:'spin .8s linear infinite' }} />
-              <span style={{ color:'#64748b', fontSize:13 }}>Cargando mapa…</span>
+              <div style={{ width:36, height:36, border:'3px solid rgba(139,90,20,.2)', borderTopColor:'#c17817', borderRadius:'50%', animation:'spin .8s linear infinite' }} />
+              <span style={{ color:'#8a6a45', fontSize:13 }}>Cargando mapa…</span>
             </div>
           </div>
         )}
@@ -331,8 +331,8 @@ export default function WorldMap({ mapData = [], loading }) {
                 style={{
                   display:'flex', alignItems:'center', gap:6,
                   padding:'5px 12px',
-                  background: isHov ? `${col.bg}30` : `${col.bg}15`,
-                  border:`1px solid ${isHov ? col.bg : col.bg+'40'}`,
+                  background: isHov ? `${col.bg}30` : `${col.bg}18`,
+                  border:`1px solid ${isHov ? col.bg : col.bg+'50'}`,
                   borderRadius:99, fontSize:12, cursor:'default',
                   transition:'all .2s ease',
                   boxShadow: isHov ? `0 0 10px ${col.ring}` : 'none',
@@ -346,8 +346,8 @@ export default function WorldMap({ mapData = [], loading }) {
                 onMouseLeave={() => setHovered(null)}
               >
                 <span style={{ fontSize:14 }}>{FLAGS[c.codigo_pais] || '🌐'}</span>
-                <span style={{ color:col.text, fontWeight:600 }}>{c.nombre_pais}</span>
-                {c.tiene_gdpr && <span style={{ color:'#34d399', fontSize:10, fontWeight:700 }}>✓ GDPR</span>}
+                <span style={{ color:'#fff3d6', fontWeight:600, textShadow:'0 1px 2px rgba(0,0,0,0.3)' }}>{c.nombre_pais}</span>
+                {c.tiene_gdpr && <span style={{ color:'#d1fae5', fontSize:10, fontWeight:700 }}>✓ GDPR</span>}
               </div>
             );
           })}
