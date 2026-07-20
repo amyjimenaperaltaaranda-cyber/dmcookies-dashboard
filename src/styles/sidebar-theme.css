@@ -1,0 +1,99 @@
+/* ==========================================================================
+   SIDEBAR — masa de galleta vívida con chispas de chocolate
+   ========================================================================== */
+.sidebar-cookie {
+  isolation: isolate;
+  background-color: #c17817;
+  background-image:
+    radial-gradient(circle at 30% 0%, rgba(255, 214, 153, 0.35), transparent 60%),
+    linear-gradient(165deg, #e0973f 0%, #c17817 45%, #8a520d 100%);
+}
+
+/* Velo oscuro sutil para que el texto blanco siga siendo legible */
+.sidebar-cookie::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: rgba(28, 14, 5, 0.22);
+}
+
+/* Chispas de chocolate esparcidas */
+.sidebar-cookie::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
+  background-image:
+    radial-gradient(circle at 18% 10%, #2b1608 0 5px, transparent 6px),
+    radial-gradient(circle at 62% 6%,  #3b1f0d 0 4px, transparent 5px),
+    radial-gradient(circle at 85% 18%, #2b1608 0 5px, transparent 6px),
+    radial-gradient(circle at 30% 26%, #3b1f0d 0 3.5px, transparent 4.5px),
+    radial-gradient(circle at 72% 34%, #2b1608 0 4.5px, transparent 5.5px),
+    radial-gradient(circle at 12% 46%, #3b1f0d 0 4px, transparent 5px),
+    radial-gradient(circle at 90% 52%, #2b1608 0 5px, transparent 6px),
+    radial-gradient(circle at 45% 60%, #3b1f0d 0 3.5px, transparent 4.5px),
+    radial-gradient(circle at 65% 72%, #2b1608 0 4.5px, transparent 5.5px),
+    radial-gradient(circle at 20% 80%, #3b1f0d 0 4px, transparent 5px),
+    radial-gradient(circle at 88% 86%, #2b1608 0 4px, transparent 5px),
+    radial-gradient(circle at 40% 92%, #3b1f0d 0 3.5px, transparent 4.5px);
+}
+
+.sidebar-cookie > * {
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar-cookie nav a,
+.sidebar-cookie > button,
+.sidebar-cookie span.font-bold {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   INSIGNIAS DE ÍCONOS — mini "galleta" decorativa detrás de cada ícono
+   ========================================================================== */
+.icon-cookie-badge {
+  position: relative;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 30%, #e6ac5c 0%, #b8721e 55%, #8a520d 100%);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(59, 31, 13, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.icon-cookie-badge::before,
+.icon-cookie-badge::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: #3b1f0d;
+}
+
+.icon-cookie-badge::before { width: 3px; height: 3px; top: 22%; left: 62%; }
+.icon-cookie-badge::after  { width: 2.5px; height: 2.5px; bottom: 20%; left: 28%; }
+
+.icon-cookie-badge--active {
+  background: radial-gradient(circle at 35% 30%, #fff3d6 0%, #ffd98a 55%, #f0a83c 100%);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(59, 31, 13, 0.5),
+    0 0 0 2px rgba(255, 255, 255, 0.25),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.group:hover .icon-cookie-badge {
+  transform: scale(1.14) rotate(8deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-cookie-badge {
+    transition: none;
+  }
+  .group:hover .icon-cookie-badge {
+    transform: none;
+  }
+}
