@@ -9,6 +9,10 @@ import { useDashboardData } from '../../hooks/useDashboardData';
 
 export default function Dashboard() {
   const [filters, setFilters] = useState({ anio: '', region: '' });
+<<<<<<< HEAD
+=======
+  const [activeTab, setActiveTab] = useState('graficos'); // 'graficos' | 'mapa'
+>>>>>>> dashboard
   const { kpis, tendencias, heatmapData, mapData, loading, error } = useDashboardData(filters);
 
   return (
@@ -42,10 +46,16 @@ export default function Dashboard() {
         {/* Totales arriba (KPIs) */}
         <KpiCards kpis={kpis} loading={loading} />
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> dashboard
         {/* Filtros izquierda + Gráficos apilados derecha */}
         <div className="flex flex-col lg:flex-row gap-6 items-start">
 
           {/* Sidebar de filtros */}
+<<<<<<< HEAD
           <aside className="w-full lg:w-64 xl:w-56 shrink-0 lg:sticky lg:top-6">
             <DashboardFilters filters={filters} onChange={setFilters} />
           </aside>
@@ -54,13 +64,50 @@ export default function Dashboard() {
           <main className="flex-1 flex flex-col gap-8">
             <MainLineChart tendencias={tendencias} loading={loading} />
             <HeatMap heatmapData={heatmapData} loading={loading} />
+=======
+          <aside className="w-full lg:w-64 xl:w-56 shrink-0 lg:sticky lg:top-6 flex flex-col gap-4">
+            <DashboardFilters filters={filters} onChange={setFilters} />
+            
+            {/* Botón para alternar entre Gráficos y Mapa */}
+            <button
+              onClick={() => setActiveTab(activeTab === 'graficos' ? 'mapa' : 'graficos')}
+              className="w-full bg-slate-800/60 hover:bg-[#e0973f] text-[#e0973f] hover:text-slate-900 border border-[#e0973f]/30 hover:border-[#e0973f] transition-all duration-300 rounded-xl py-3 px-4 font-bold tracking-wide shadow-sm flex items-center justify-center gap-2 group"
+            >
+              {activeTab === 'graficos' ? (
+                <><span>🌎</span> MAPA MUNDIAL</>
+              ) : (
+                <><span>📊</span> VER GRÁFICOS</>
+              )}
+            </button>
+          </aside>
+
+          {/* Panel Principal Condicional */}
+          <main className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 w-full max-w-full">
+            {activeTab === 'graficos' ? (
+              <>
+                <div className="min-w-0">
+                  <MainLineChart tendencias={tendencias} loading={loading} />
+                </div>
+                <div className="min-w-0">
+                  <HeatMap heatmapData={heatmapData} loading={loading} />
+                </div>
+              </>
+            ) : (
+              <div className="lg:col-span-2 min-w-0">
+                <WorldMap mapData={mapData} loading={loading} />
+              </div>
+            )}
+>>>>>>> dashboard
           </main>
 
         </div>
 
+<<<<<<< HEAD
         {/* Mapa mundial de países monitoreados */}
         <WorldMap mapData={mapData} loading={loading} />
 
+=======
+>>>>>>> dashboard
       </div>
     </div>
   );

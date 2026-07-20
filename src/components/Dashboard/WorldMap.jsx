@@ -97,6 +97,7 @@ function Tooltip({ country, screenPos, svgRect }) {
       <div style={{ height: 1, background: 'rgba(255,255,255,0.08)', marginBottom: 8 }} />
       {/* Metrics */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+<<<<<<< HEAD
         <MetricBar label="Cookies Internet"  value={country.cookies_internet}  color="#e6b566" />
         <MetricBar label="Privacidad Online"  value={country.privacidad_online} color="#b8721e" />
         <MetricBar label="Datos Personales"   value={country.datos_personales}  color="#c9713a" />
@@ -105,6 +106,24 @@ function Tooltip({ country, screenPos, svgRect }) {
           value={country.tracked != null ? (country.tracked * 100).toFixed(1) : null}
           color="#8a4a12"
         />
+=======
+        {country.cookies_internet != null && (
+          <MetricBar label="Cookies Internet"  value={country.cookies_internet}  color="#e6b566" />
+        )}
+        {country.privacidad_online != null && (
+          <MetricBar label="Privacidad Online"  value={country.privacidad_online} color="#b8721e" />
+        )}
+        {country.datos_personales != null && (
+          <MetricBar label="Datos Personales"   value={country.datos_personales}  color="#c9713a" />
+        )}
+        {country.tracked != null && (
+          <MetricBar
+            label="Tasa de Rastreo (%)"
+            value={(country.tracked * 100).toFixed(1)}
+            color="#8a4a12"
+          />
+        )}
+>>>>>>> dashboard
       </div>
     </div>
   );
@@ -171,6 +190,18 @@ export default function WorldMap({ mapData = [], loading }) {
             <p style={{ color:'#f3ddb0', fontSize:12, margin:'2px 0 0' }}>
               {loading ? 'Cargando…' : `${visibleCodes.length} países · Pasa el cursor para ver métricas`}
             </p>
+<<<<<<< HEAD
+=======
+            <details className="mt-1 group">
+              <summary className="text-xs font-semibold text-[#f0cf8e] cursor-pointer hover:underline outline-none flex items-center gap-1">
+                <span>¿Qué significa este mapa?</span>
+                <span className="group-open:rotate-180 transition-transform duration-300 text-[10px]">▼</span>
+              </summary>
+              <p className="text-[11px] leading-relaxed text-slate-100 mt-2 bg-[rgba(43,22,8,0.7)] p-3 rounded-lg border border-[rgba(230,172,92,0.3)] max-w-md shadow-lg absolute z-50">
+                Brinda un panorama geográfico de las métricas. Al interactuar con cada país, despliega información consolidada (promedios) de búsquedas, tasa de rastreo local y la vigencia de normativas como el GDPR.
+              </p>
+            </details>
+>>>>>>> dashboard
           </div>
         </div>
 
