@@ -1,0 +1,138 @@
+/* ==========================================================================
+   TARJETAS "GALLETA" REUTILIZABLES
+   Usadas en: Problemática (indicadores) y Dashboard (KPIs, diccionario)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Tarjetas de indicador (Problemática) — crema + chispas + mordisco
+   -------------------------------------------------------------------------- */
+.indicator-cookie-card {
+  position: relative;
+  isolation: isolate; /* aísla el z-index negativo del ::before para que nunca afecte al tooltip */
+  box-shadow: 0 2px 6px rgba(43, 22, 8, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Capa decorativa aparte (fondo crema + chispas + mordisco): así el "mask" nunca
+   toca al tooltip, que es un hijo real de la tarjeta y sobresale de su caja. */
+.indicator-cookie-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-color: #fff3d6;
+  background-image:
+    radial-gradient(circle at 18% 28%, #3b1f0d 0 3px, transparent 4px),
+    radial-gradient(circle at 72% 18%, #2b1608 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 48% 68%, #3b1f0d 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 85% 62%, #2b1608 0 2px, transparent 3px),
+    radial-gradient(circle at 25% 85%, #3b1f0d 0 2px, transparent 3px);
+  border: 1px solid #e6ac5c;
+
+  /* "Mordisco" en la esquina superior izquierda */
+  -webkit-mask-image: radial-gradient(circle 16px at 2px 2px, transparent 99%, black 100%);
+  mask-image: radial-gradient(circle 16px at 2px 2px, transparent 99%, black 100%);
+}
+
+.indicator-cookie-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(43, 22, 8, 0.28);
+}
+
+/* --------------------------------------------------------------------------
+   Tooltip tipo burbuja — aparece con hover (CSS) o clic (clase --open por React)
+   -------------------------------------------------------------------------- */
+.indicator-tooltip {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  margin-top: 12px;
+  transform: translateX(-50%) translateY(4px);
+  width: 230px;
+  max-width: 62vw;
+  z-index: 30;
+  padding: 10px 12px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  text-align: left;
+  color: #3b1f0d;
+  background-color: #fff3d6;
+  background-image:
+    radial-gradient(circle at 15% 25%, #3b1f0d 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 80% 70%, #2b1608 0 2px, transparent 3px),
+    radial-gradient(circle at 55% 15%, #3b1f0d 0 1.8px, transparent 2.8px);
+  border: 1px solid #e6ac5c;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+/* Piquito de la burbuja apuntando a la tarjeta */
+.indicator-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: #fff3d6;
+  border-left: 1px solid #e6ac5c;
+  border-top: 1px solid #e6ac5c;
+  transform-origin: center;
+  rotate: 45deg;
+  margin-bottom: -6px;
+}
+
+.group:hover .indicator-tooltip,
+.indicator-tooltip--open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .indicator-cookie-card,
+  .indicator-tooltip {
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Tarjetas KPI del Dashboard — mismo lenguaje visual (crema + chispas)
+   -------------------------------------------------------------------------- */
+.kpi-cookie-card {
+  position: relative;
+  overflow: hidden;
+  background-color: #fff3d6;
+  background-image:
+    radial-gradient(circle at 12% 20%, #3b1f0d 0 3px, transparent 4px),
+    radial-gradient(circle at 60% 12%, #2b1608 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 85% 35%, #3b1f0d 0 2px, transparent 3px),
+    radial-gradient(circle at 30% 78%, #2b1608 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 70% 82%, #3b1f0d 0 2px, transparent 3px),
+    radial-gradient(circle at 92% 90%, #2b1608 0 2px, transparent 3px);
+  border: 1px solid #e6ac5c;
+  box-shadow: 0 2px 8px rgba(43, 22, 8, 0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.kpi-cookie-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(43, 22, 8, 0.3);
+}
+
+/* Diccionario de datos — mismo lenguaje visual (definida acá para compartir clases) */
+.dict-term-card {
+  background-color: #fff3d6;
+  background-image:
+    radial-gradient(circle at 15% 25%, #3b1f0d 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 75% 15%, #2b1608 0 2px, transparent 3px),
+    radial-gradient(circle at 55% 80%, #3b1f0d 0 2px, transparent 3px),
+    radial-gradient(circle at 88% 60%, #2b1608 0 1.8px, transparent 2.8px);
+  border: 1px solid #e6ac5c;
+  box-shadow: 0 2px 6px rgba(43, 22, 8, 0.18);
+}
