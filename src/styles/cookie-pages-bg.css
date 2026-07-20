@@ -4,10 +4,11 @@
   position: relative;
   isolation: isolate;
 
-  background-color: #1c0e05 !important;
+  background-color: #2e1006 !important;
   background-image:
-    radial-gradient(circle at 50% 20%, rgba(255, 176, 90, 0.14), transparent 55%),
-    linear-gradient(160deg, #2b1608 0%, #3b1f0d 35%, #1c0e05 100%) !important;
+    radial-gradient(circle at 50% 12%, rgba(255, 140, 61, 0.24), transparent 58%),
+    radial-gradient(circle at 85% 85%, rgba(217, 122, 43, 0.12), transparent 50%),
+    linear-gradient(155deg, #5c220a 0%, #7a3410 30%, #3a1608 70%, #1f0d04 100%) !important;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,13 +24,13 @@
   pointer-events: none;
 
   background-image:
-    radial-gradient(circle at 12% 20%, rgba(255, 176, 90, 0.16) 0, rgba(255, 176, 90, 0) 3px),
-    radial-gradient(circle at 68% 12%, rgba(255, 176, 90, 0.14) 0, rgba(255, 176, 90, 0) 2.5px),
-    radial-gradient(circle at 40% 55%, rgba(255, 176, 90, 0.13) 0, rgba(255, 176, 90, 0) 3px),
-    radial-gradient(circle at 88% 45%, rgba(255, 176, 90, 0.12) 0, rgba(255, 176, 90, 0) 2px),
-    radial-gradient(circle at 22% 82%, rgba(255, 176, 90, 0.14) 0, rgba(255, 176, 90, 0) 2.5px),
-    radial-gradient(circle at 78% 88%, rgba(255, 176, 90, 0.11) 0, rgba(255, 176, 90, 0) 2px),
-    radial-gradient(circle at 55% 32%, rgba(255, 176, 90, 0.10) 0, rgba(255, 176, 90, 0) 2px);
+    radial-gradient(circle at 12% 20%, rgba(255, 176, 90, 0.22) 0, rgba(255, 176, 90, 0) 3px),
+    radial-gradient(circle at 68% 12%, rgba(255, 176, 90, 0.20) 0, rgba(255, 176, 90, 0) 2.5px),
+    radial-gradient(circle at 40% 55%, rgba(255, 176, 90, 0.19) 0, rgba(255, 176, 90, 0) 3px),
+    radial-gradient(circle at 88% 45%, rgba(255, 176, 90, 0.17) 0, rgba(255, 176, 90, 0) 2px),
+    radial-gradient(circle at 22% 82%, rgba(255, 176, 90, 0.20) 0, rgba(255, 176, 90, 0) 2.5px),
+    radial-gradient(circle at 78% 88%, rgba(255, 176, 90, 0.16) 0, rgba(255, 176, 90, 0) 2px),
+    radial-gradient(circle at 55% 32%, rgba(255, 176, 90, 0.15) 0, rgba(255, 176, 90, 0) 2px);
   background-size: 260px 260px;
   background-repeat: repeat;
   animation: cookie-crumbs-drift 40s linear infinite;
