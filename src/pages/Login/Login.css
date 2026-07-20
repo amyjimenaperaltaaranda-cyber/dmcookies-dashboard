@@ -1,0 +1,407 @@
+/* ==========================================================================
+   ESTRUCTURA PRINCIPAL — 3 COLUMNAS: fuentes | formulario cristal | académicos
+   ========================================================================== */
+.login-layout {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  width: 100%;
+  gap: 2rem;
+  padding: 3rem 4rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, sans-serif;
+
+  /* Fondo tipo horno: tonos cálidos oscuros con un resplandor central */
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 176, 90, 0.18), transparent 55%),
+    linear-gradient(160deg, #2b1608 0%, #3b1f0d 35%, #1c0e05 100%);
+}
+
+/* ==========================================================================
+   CAPA DE AMBIENTE: HUMO / VAPOR
+   ========================================================================== */
+.login-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.login-smoke {
+  position: absolute;
+  bottom: -10%;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  filter: blur(18px);
+  animation: smoke-rise 14s ease-in infinite;
+}
+
+.login-smoke--1 { left: 15%; animation-delay: 0s; width: 220px; height: 220px; }
+.login-smoke--2 { left: 48%; animation-delay: 4s; width: 320px; height: 320px; }
+.login-smoke--3 { left: 75%; animation-delay: 8s; width: 240px; height: 240px; }
+
+@keyframes smoke-rise {
+  0%   { transform: translateY(0) translateX(0) scale(0.9); opacity: 0; }
+  15%  { opacity: 0.55; }
+  50%  { transform: translateY(-45vh) translateX(2vw) scale(1.15); opacity: 0.35; }
+  100% { transform: translateY(-95vh) translateX(-1vw) scale(1.4); opacity: 0; }
+}
+
+/* ==========================================================================
+   CAPA DE AMBIENTE: PARTÍCULAS (chispas de harina/canela)
+   ========================================================================== */
+.login-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 214, 153, 0.65);
+  box-shadow: 0 0 6px 1px rgba(255, 214, 153, 0.5);
+  animation: particle-float 9s ease-in-out infinite;
+}
+
+.login-particle--1 { top: 70%; left: 20%; animation-delay: 0s; }
+.login-particle--2 { top: 80%; left: 40%; animation-delay: 1.5s; }
+.login-particle--3 { top: 65%; left: 60%; animation-delay: 3s; }
+.login-particle--4 { top: 85%; left: 75%; animation-delay: 2s; }
+.login-particle--5 { top: 75%; left: 88%; animation-delay: 4.5s; }
+
+@keyframes particle-float {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  20%  { opacity: 0.8; }
+  100% { transform: translateY(-70vh) translateX(3vw); opacity: 0; }
+}
+
+/* ==========================================================================
+   COLUMNAS LATERALES: LOGOS FLOTANTES
+   ========================================================================== */
+.login-side {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  flex: 0 0 280px; /* 🚀 Ensanchado a 280px para dar el soporte perfecto a logos gigantes */
+}
+
+.login-side__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: -0.5rem;
+}
+
+.login-logo--float {
+  animation: logo-float 5s ease-in-out infinite;
+}
+
+.login-side--academic .login-logo--float:nth-child(2) { animation-delay: 1.2s; }
+.login-side--sources .login-logo--float:nth-child(3) { animation-delay: 0.8s; }
+
+@keyframes logo-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* Logos académicos: ¡GIGANTES! */
+.login-logo--academic {
+  width: 100% !important;
+  max-width: 260px !important; /* 🔥 Escalado masivo de 215px a 260px */
+  height: 115px !important;    /* 🔥 Escalado masivo de 95px a 115px */
+  object-fit: contain !important;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.55));
+}
+
+/* Logos de fuentes de datos: ¡GIGANTES! */
+.login-logo--source {
+  width: 100% !important;
+  max-width: 220px !important; /* 🔥 Escalado masivo de 185px a 220px */
+  height: 90px !important;     /* 🔥 Escalado masivo de 75px a 90px */
+  object-fit: contain !important;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
+  opacity: 0.95;
+}
+
+/* ==========================================================================
+   FORMULARIO TIPO CRISTAL (GLASSMORPHISM), AL CENTRO
+   ========================================================================== */
+.login-form-panel {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 420px;
+  max-width: 440px;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 2.25rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.login-form__title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.03em;
+}
+
+.login-form__subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+  text-align: center;
+  margin: 0 0 1.75rem 0;
+}
+
+.login-form__error {
+  margin-bottom: 1rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.6rem;
+  background: rgba(220, 38, 38, 0.15);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  color: #fecaca;
+  font-size: 0.8rem;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 0.6rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-form input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.login-form input:focus {
+  border-color: rgba(255, 176, 90, 0.7);
+  box-shadow: 0 0 0 3px rgba(255, 176, 90, 0.15);
+}
+
+.login-form__captcha {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0 1.25rem 0;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 0.85rem;
+  background: linear-gradient(135deg, #d97706, #92400e);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.1s;
+}
+
+.login-form button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.login-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   RESPONSIVE: CELULAR (Escalado de logos gigantes en móvil)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .login-layout {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2.5rem 1.5rem; /* Un poco más de aire arriba y abajo */
+    gap: 2.5rem;            /* Más espacio de separación entre secciones */
+  }
+
+  /* Contenedor de logos académicos en móvil */
+  .login-side--academic {
+    order: 1;
+    flex-direction: row;
+    gap: 2rem; /* Más separación horizontal entre logos */
+  }
+
+  .login-form-panel {
+    order: 2;
+    max-width: 100%;
+  }
+
+  /* Contenedor de logos de fuentes en móvil */
+  .login-side--sources {
+    order: 3;
+    flex-direction: row;
+    gap: 2rem; /* Más separación horizontal entre logos */
+  }
+
+  /* 🚀 Logos académicos en celular: ¡Mucho más grandes y vistosos! */
+  .login-logo--academic {
+    max-width: 160px !important; /* Subido de 140px a 160px */
+    height: 65px !important;     /* Subido de 55px a 65px */
+  }
+
+  /* 🚀 Logos de fuentes en celular: ¡Mucho más grandes y vistosos! */
+  .login-logo--source {
+    max-width: 140px !important; /* Subido de 120px a 140px */
+    height: 55px !important;     /* Subido de 48px a 55px */
+  }
+
+  .login-side__label {
+    display: none; /* Mantenemos oculto el texto para dar prioridad visual a los logos */
+  }
+
+  .login-form {
+    padding: 2rem 1.5rem;
+  }
+
+  .login-form__title {
+    font-size: 1.8rem; /* Un toque más de presencia al título */
+  }
+}
+
+/* ==========================================================================
+   INTERACTIVIDAD: ESCÁNER DE GALLETA (LUPA)
+   ========================================================================== */
+.cookie-scanner {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1.5rem auto;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 176, 90, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none; /* Oculta el cursor nativo para usar la lupa como cursor */
+  overflow: hidden;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* La galleta tradicional flotando suavemente */
+.cookie-base {
+  width: 100px; 
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  animation: cookie-spin 12s linear infinite; /* Un giro un poco más lento para apreciar el pixel art */
+  transition: transform 0.3s ease;
+}
+
+/* Control estricto para que tu SVG se vea nítido y mantenga su estilo pixel art */
+.cookie-pixel {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4));
+  
+  /* Evita que el navegador emborrone el PNG al renderizarlo */
+  image-rendering: pixelated; 
+  image-rendering: crisp-edges;
+}
+
+@keyframes cookie-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* El cuerpo de la lupa (lente) */
+.scanner-lens {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 3px solid #ffb05a;
+  box-shadow: 
+    0 0 15px rgba(255, 176, 90, 0.6), 
+    inset 0 0 10px rgba(255, 176, 90, 0.4);
+  pointer-events: none; /* Permite que el mouse detecte el contenedor de abajo */
+  z-index: 10;
+  overflow: hidden;
+  transition: opacity 0.2s ease, transform 0.1s ease-out;
+  background: rgba(43, 22, 8, 0.85); /* Tono de fondo oscuro tipo "radiografía" */
+}
+
+/* Añadimos el mango de la lupa usando un pseudoelemento */
+.scanner-lens::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  width: 8px;
+  height: 24px;
+  background: #ffb05a;
+  transform: rotate(-45deg);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(255, 176, 90, 0.6);
+}
+
+/* Contenedor que sincroniza el movimiento inverso de la galleta analizada */
+.scanner-lens__overlay {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* La galleta analizada (Digital / Bytes de seguridad) */
+.cookie-digital {
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-family: 'Courier New', Courier, monospace;
+  color: #ffb05a;
+  text-shadow: 0 0 8px rgba(255, 176, 90, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(255, 176, 90, 0.25) 0%, transparent 70%);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 176, 90, 0.6);
+  animation: radar-sweep 2s linear infinite;
+}
+
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg) scale(0.95); }
+  50% { transform: rotate(180deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(0.95); }
+}

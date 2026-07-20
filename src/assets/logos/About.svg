@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 130">
+  <defs>
+    <!-- Máscara para crear el espacio hueco (recorte) alrededor de la figura central -->
+    <mask id="gap-mask">
+      <rect width="100%" height="100%" fill="white" />
+      <!-- Expansión de la cabeza central -->
+      <circle cx="100" cy="40" r="26" fill="black" />
+      <!-- Expansión del cuerpo central (usando un trazo grueso para añadir margen) -->
+      <path d="M 68 65 Q 100 80 132 65 L 152 110 A 8 8 0 0 1 145 120 L 55 120 A 8 8 0 0 1 48 110 Z" fill="black" stroke="black" stroke-width="8" stroke-linejoin="round" />
+    </mask>
+  </defs>
+
+  <!-- Figuras de fondo (enmascaradas) -->
+  <g fill="white" mask="url(#gap-mask)">
+    <!-- Persona izquierda -->
+    <circle cx="70" cy="42" r="19" />
+    <path d="M 80 60 Q 60 62 42 68 L 22 105 A 8 8 0 0 0 29 115 L 90 115 Z" />
+    
+    <!-- Persona derecha -->
+    <circle cx="130" cy="42" r="19" />
+    <path d="M 120 60 Q 140 62 158 68 L 178 105 A 8 8 0 0 1 171 115 L 110 115 Z" />
+  </g>
+
+  <!-- Figura central -->
+  <g fill="white">
+    <circle cx="100" cy="40" r="22" />
+    <path d="M 68 65 Q 100 80 132 65 L 152 110 A 8 8 0 0 1 145 120 L 55 120 A 8 8 0 0 1 48 110 Z" />
+  </g>
+</svg>

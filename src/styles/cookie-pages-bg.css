@@ -1,0 +1,50 @@
+.flex.min-h-screen.bg-slate-900.text-gray-100,
+.overflow-y-auto.bg-slate-900.text-slate-50.min-h-screen.w-full,
+.flex.flex-col.h-screen.text-slate-200.p-6.bg-slate-950 {
+  position: relative;
+  isolation: isolate;
+
+  background-color: #2e1006 !important;
+  background-image:
+    radial-gradient(circle at 50% 12%, rgba(255, 140, 61, 0.24), transparent 58%),
+    radial-gradient(circle at 85% 85%, rgba(217, 122, 43, 0.12), transparent 50%),
+    linear-gradient(155deg, #5c220a 0%, #7a3410 30%, #3a1608 70%, #1f0d04 100%) !important;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.flex.min-h-screen.bg-slate-900.text-gray-100::before,
+.overflow-y-auto.bg-slate-900.text-slate-50.min-h-screen.w-full::before,
+.flex.flex-col.h-screen.text-slate-200.p-6.bg-slate-950::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1; /* negativo: garantiza que quede debajo de TODO sin tener que "subir" ningún otro elemento */
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(255, 176, 90, 0.22) 0, rgba(255, 176, 90, 0) 3px),
+    radial-gradient(circle at 68% 12%, rgba(255, 176, 90, 0.20) 0, rgba(255, 176, 90, 0) 2.5px),
+    radial-gradient(circle at 40% 55%, rgba(255, 176, 90, 0.19) 0, rgba(255, 176, 90, 0) 3px),
+    radial-gradient(circle at 88% 45%, rgba(255, 176, 90, 0.17) 0, rgba(255, 176, 90, 0) 2px),
+    radial-gradient(circle at 22% 82%, rgba(255, 176, 90, 0.20) 0, rgba(255, 176, 90, 0) 2.5px),
+    radial-gradient(circle at 78% 88%, rgba(255, 176, 90, 0.16) 0, rgba(255, 176, 90, 0) 2px),
+    radial-gradient(circle at 55% 32%, rgba(255, 176, 90, 0.15) 0, rgba(255, 176, 90, 0) 2px);
+  background-size: 260px 260px;
+  background-repeat: repeat;
+  animation: cookie-crumbs-drift 40s linear infinite;
+}
+
+@keyframes cookie-crumbs-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 260px 260px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flex.min-h-screen.bg-slate-900.text-gray-100::before,
+  .overflow-y-auto.bg-slate-900.text-slate-50.min-h-screen.w-full::before,
+  .flex.flex-col.h-screen.text-slate-200.p-6.bg-slate-950::before {
+    animation: none;
+  }
+}
