@@ -7,6 +7,7 @@ import iconObjetivo     from '../../assets/logos/objetivo.svg'
 import iconConsultas    from '../../assets/logos/Consultas.svg'
 import iconDashboard    from '../../assets/logos/Dashboard.svg'
 import iconAbout        from '../../assets/logos/About.svg'
+import iconDiccionario  from '../../assets/logos/diccionario.svg'
 
 export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   const location = useLocation()
@@ -18,6 +19,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
     { name: 'Consultas',      path: '/consultas',    icon: iconConsultas    },
     { name: 'Dashboard',      path: '/dashboard',    icon: iconDashboard    },
     { name: 'Sobre Nosotros', path: '/about',        icon: iconAbout        },
+    { name: 'Diccionario de Datos', path: '/diccionario', icon: iconDiccionario },
   ]
 
   return (
