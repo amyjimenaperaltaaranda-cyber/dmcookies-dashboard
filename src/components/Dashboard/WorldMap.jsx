@@ -97,16 +97,6 @@ function Tooltip({ country, screenPos, svgRect }) {
       <div style={{ height: 1, background: 'rgba(255,255,255,0.08)', marginBottom: 8 }} />
       {/* Metrics */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-<<<<<<< HEAD
-        <MetricBar label="Cookies Internet"  value={country.cookies_internet}  color="#e6b566" />
-        <MetricBar label="Privacidad Online"  value={country.privacidad_online} color="#b8721e" />
-        <MetricBar label="Datos Personales"   value={country.datos_personales}  color="#c9713a" />
-        <MetricBar
-          label="Tasa de Rastreo (%)"
-          value={country.tracked != null ? (country.tracked * 100).toFixed(1) : null}
-          color="#8a4a12"
-        />
-=======
         {country.cookies_internet != null && (
           <MetricBar label="Cookies Internet"  value={country.cookies_internet}  color="#e6b566" />
         )}
@@ -123,7 +113,6 @@ function Tooltip({ country, screenPos, svgRect }) {
             color="#8a4a12"
           />
         )}
->>>>>>> dashboard
       </div>
     </div>
   );
@@ -190,8 +179,6 @@ export default function WorldMap({ mapData = [], loading }) {
             <p style={{ color:'#f3ddb0', fontSize:12, margin:'2px 0 0' }}>
               {loading ? 'Cargando…' : `${visibleCodes.length} países · Pasa el cursor para ver métricas`}
             </p>
-<<<<<<< HEAD
-=======
             <details className="mt-1 group">
               <summary className="text-xs font-semibold text-[#f0cf8e] cursor-pointer hover:underline outline-none flex items-center gap-1">
                 <span>¿Qué significa este mapa?</span>
@@ -201,7 +188,6 @@ export default function WorldMap({ mapData = [], loading }) {
                 Brinda un panorama geográfico de las métricas. Al interactuar con cada país, despliega información consolidada (promedios) de búsquedas, tasa de rastreo local y la vigencia de normativas como el GDPR.
               </p>
             </details>
->>>>>>> dashboard
           </div>
         </div>
 

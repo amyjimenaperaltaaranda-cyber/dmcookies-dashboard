@@ -33,14 +33,6 @@ export default function MainLineChart({ tendencias, loading }) {
 
   return (
     <div className="bg-slate-800/40 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-slate-700/50 h-[420px] flex flex-col">
-<<<<<<< HEAD
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h3 className="text-lg font-bold text-white tracking-tight">Tendencias Google</h3>
-          <p className="text-sm text-slate-400 mt-1">Índices de búsqueda por período</p>
-        </div>
-        <div className="flex flex-wrap items-center gap-3">
-=======
       <div className="flex justify-between items-start mb-6">
         <div>
           <h3 className="text-lg font-bold text-white tracking-tight">Tendencias Google</h3>
@@ -56,7 +48,6 @@ export default function MainLineChart({ tendencias, loading }) {
           </details>
         </div>
         <div className="flex flex-wrap items-center justify-end gap-3">
->>>>>>> dashboard
           {Object.entries(colors).map(([name, color]) => (
             <span key={name} className="flex items-center text-xs font-medium text-slate-300">
               <div className="w-2 h-2 rounded-full mr-1.5" style={{ backgroundColor: color }}></div>
@@ -82,11 +73,7 @@ export default function MainLineChart({ tendencias, loading }) {
             <AreaChart data={tendencias} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 {Object.entries(colors).map(([name, color]) => (
-<<<<<<< HEAD
-                  <linearGradient key={name} id={`grad-${name}`} x1="0" y1="0" x2="0" y2="1">
-=======
                   <linearGradient key={name} id={`grad-${name.replace(/\s+/g, '-')}`} x1="0" y1="0" x2="0" y2="1">
->>>>>>> dashboard
                     <stop offset="5%" stopColor={color} stopOpacity={0.3} />
                     <stop offset="95%" stopColor={color} stopOpacity={0} />
                   </linearGradient>
@@ -118,11 +105,7 @@ export default function MainLineChart({ tendencias, loading }) {
                   stroke={color}
                   strokeWidth={2.5}
                   fillOpacity={1}
-<<<<<<< HEAD
-                  fill={`url(#grad-${name})`}
-=======
                   fill={`url(#grad-${name.replace(/\s+/g, '-')})`}
->>>>>>> dashboard
                   activeDot={{ r: 5, fill: color, stroke: '#0f172a', strokeWidth: 2 }}
                 />
               ))}
